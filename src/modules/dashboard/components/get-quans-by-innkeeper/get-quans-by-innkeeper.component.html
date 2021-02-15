@@ -1,0 +1,63 @@
+<sb-card>
+    <div class="card-body">
+        <div *ngIf="checkquans; then display; else loading"></div>
+        <ng-template #display>
+            <div class="row">
+                <div class="col-md-4 pd-checkbox" *ngFor="let quan of listquans"
+                    routerLink="/dashboard/quans/{{quan.id}}">
+                    <label class="customer-checkbox">
+                        <div class="row">
+                            <div>
+                                <sb-card>
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <div>
+                                                <br>
+                                                <div *ngIf="quan.image">
+                                                    <img style="width: 150px; height: 150px;" src="{{url+'/'+quan.image}}">
+                                                </div>
+                                                <div *ngIf="!quan.image">
+                                                    <img style="width: 150px; height: 150px;" class="profile_img" src="../../../assets/img/avatar.jpg">
+                                                </div>
+                                                <br>
+                                                <table class="table table-striped ">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>full_name</td>
+                                                            <td> <strong>{{ quan.name }}</strong></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Phone</td>
+                                                            <td><strong>{{ quan.phone}}</strong></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>address</td>
+                                                            <td><strong>{{ quan.address }}</strong></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                <fa-icon routerLink="/dashboard/editQuanByTokenInnkeeper/{{quan.id}}" class='fas fa-trash fa-2x'
+                                                    [icon]='["fas","edit"]'></fa-icon>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </sb-card>
+                                &emsp;
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #loading>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>

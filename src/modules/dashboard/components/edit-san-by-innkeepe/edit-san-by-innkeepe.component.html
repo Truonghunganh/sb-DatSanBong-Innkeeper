@@ -1,0 +1,46 @@
+<div class="container py-2">
+    <div class="row my-2">
+        <div *ngIf="checksan; then display ; else loading"></div>
+        <ng-template #display>
+            <div class="col-lg-12 order-lg-1 personal-info">
+                <form>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label form-control-label">Name</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" #name name="san.name" [(ngModel)]="san.name" required
+                                placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label form-control-label">Numberpeople</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" #numberpeople name="san.numberpeople" [(ngModel)]="san.numberpeople" required
+                                placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label form-control-label">Priceperhour</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" #priceperhour name="san.priceperhour" [(ngModel)]="san.priceperhour" required placeholder="Name" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-9 ml-auto text-right">
+                            <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Cancel" />
+                            <input type="button" class="btn btn-primary"
+                                (click)="edit(name.value,numberpeople.value,priceperhour.value)" value="Save Changes" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </ng-template>
+        <ng-template #loading>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

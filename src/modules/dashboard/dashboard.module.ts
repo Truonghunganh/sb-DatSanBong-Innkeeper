@@ -1,4 +1,5 @@
 /* tslint:disable: ordered-imports*/
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -22,6 +23,14 @@ import * as dashboardServices from './services';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { HttpClientModule } from '@angular/common/http';
+
+import { FilePondModule, registerPlugin } from 'ngx-filepond';
+
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+
 @NgModule({
     imports: [
         CalendarModule.forRoot({
@@ -36,6 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
         AppCommonModule,
         FullCalendarModule,
         NavigationModule,
+        FilePondModule,
+
     ],
     providers: [...dashboardServices.services, ...dashboardGuards.guards],
     declarations: [...dashboardContainers.containers, ...dashboardComponents.components],

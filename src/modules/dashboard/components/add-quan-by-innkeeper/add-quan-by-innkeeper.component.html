@@ -1,0 +1,44 @@
+<div class="container py-2">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-1 personal-info">
+            <form >
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Tên quán</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" #name required placeholder="Name" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Address quán</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" #address required  placeholder="Address" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Address link</label>
+                    <div class="col-lg-9">
+                        <input class="form-control" #linkaddress required placeholder="Address link" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label form-control-label">Image</label>
+                    <div class="col-lg-9">
+                        <file-pond #myPond 
+                            (oninit)="pondHandleInit()" 
+                            [options]="pondOptions" 
+                            (change)="pondHandleAddFile($event)">
+                        </file-pond>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-9 ml-auto text-right">
+                        <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Cancel" />
+                        <input type="button" class="btn btn-primary"
+                            (click)="Add(name.value,address.value,linkaddress.value,image)" value="Save Changes" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

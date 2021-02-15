@@ -24,27 +24,55 @@ export const ROUTES: Routes = [
     },
 
     {
-        path: 'quan',
+        path: 'quans',
         canActivate: [],
         component: dashboardContainers.DashboardComponent,
     },
     {
-        path: 'san/:idquan',
+        path: 'addquan',
         canActivate: [],
-        component: dashboardContainers.DashboardListsanComponent,
+        component: dashboardContainers.DashboardAddQuanByInnkeeperComponent,
     },
     {
-        path: 'user',
+        path: 'editQuan/:idquan',
         canActivate: [],
-        component: dashboardContainers.DashboardUserComponent,
-    },
-    {
-        path: 'edituser',
-        canActivate: [],
-        component: dashboardContainers.DashboardUserEditComponent,
+        component: dashboardContainers.DashboardComponent,
     },
 
-  
+
+    {
+        path: 'innkeeper',
+        canActivate: [],
+        component: dashboardContainers.DashboardInnkeeperComponent,
+    },
+    {
+        path: 'editinnkeeper',
+        canActivate: [],
+        component: dashboardContainers.DashboardInnkeeperEditComponent,
+    },
+    {
+        path: 'editQuanByTokenInnkeeper/:idquan',
+        canActivate: [],
+        component: dashboardContainers.DashboardEditQuanByTokenInnkeeperComponent,
+    },
+    {
+        path: 'quans/:idquan',
+        canActivate: [],
+        component: dashboardContainers.DashboardGetListSanByTokenInnkeepeAndIdquanComponent,
+    },
+    {
+        path: 'addSan/:idquan',
+        canActivate: [],
+        component: dashboardContainers.DashboardAddSanByInnkeeperComponent,
+    },
+
+    {
+        path: 'editSan/:id',
+        canActivate: [],
+        component: dashboardContainers.DashboardEditSanByInnkeeperComponent,
+    },
+
+
 ];
 
 @NgModule({

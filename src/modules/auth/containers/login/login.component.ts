@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { User} from './../../models/auth.model';
 import Swal from 'sweetalert2';
 
-import { Admin } from './../../models/auth.model';
 import { AuthService } from './../../services/auth.service';
 
 @Component({
@@ -15,8 +14,6 @@ import { AuthService } from './../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
     loginFormGroup: any;
-    error = '';
-    a = true;
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthService,
@@ -28,12 +25,12 @@ export class LoginComponent implements OnInit {
             phone: ['', Validators.required],
             password: ['', Validators.required],
         });
-        this.authService.checkTokenUser().subscribe(
+        this.authService.checkTokenInnkeeper().subscribe(
             result => {
                 console.log(result);
                 
                 if (result.status) {
-                    this.router.navigate(['/dashboard/quan']);
+                    this.router.navigate(['/dashboard/innkeeper']);
                 }
                 
             }
@@ -44,7 +41,9 @@ export class LoginComponent implements OnInit {
         const user=new User(phone,password);
         this.authService.login(user).subscribe(result => {
             if (result.status) {
-                this.router.navigate(['/dashboard/quan']);
+                console.log(result);
+                
+                //this.router.navigate(['/dashboard/quan']);
             } else {
                 Swal.fire({
                     icon: 'error',

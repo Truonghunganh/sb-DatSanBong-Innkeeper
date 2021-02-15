@@ -7,39 +7,29 @@ import { Observable, of, throwError } from 'rxjs';
 @Injectable()
 export class AppCommonService {
     constructor(@Inject(LOCAL_STORAGE) private storage: WebStorageService) {}
-    public httpOptions = {
-        headers: new HttpHeaders({
-            'tokenUser': JSON.parse(this.storage.get('tokenUser')),
-            //Authorization: `Bearer ${JSON.parse(this.storage.get('admin')).token}`,
-            'Access-Control-Allow-Credentials': 'true',
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-
-        }),
-    };
-    public httpOption(){
-        if(this.storage.get('admin').token){
-            console.log(1);
-            
+    getToken(){
+        if(this.storage.get('tokenInnkeeper')){
+            return this.storage.get('tokenInnkeeper');
         }
         else{
-            console.log(2);
-            
+            return "1";
         }
     }
-    public httpOptions1 = {
+    public httpOptions = {
         headers: new HttpHeaders({
-            'Access-Control-Allow-Credentials': 'true',
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-            'token': `${environment.token}`,
-           // 'Authorization': 'Bearer ' + environment.token
+            'tokenInnkeeper': JSON.parse(this.getToken()),
+            //'Access-Control-Allow-Credentials': 'true',
+            //'Access-Control-Allow-Origin': '*',
+            //'Content-Type': 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL',
+          //  'Content-Type':'application/json'
+
         }),
     };
-
-    getAppCommon$(): Observable<{}> {
-        return of({});
-    }
+    public httpOptions1 = {
+        headers: new HttpHeaders({
+            'Content-Type': 'multipart/form-data', 'Cache-Control': 'no-cache', 'Pragma': 'no-cache'
+        })
+    };
     errorHandler(error: HttpErrorResponse) {
         return throwError(error.message || 'Serve error');
     }

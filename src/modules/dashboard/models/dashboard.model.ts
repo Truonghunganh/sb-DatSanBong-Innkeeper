@@ -10,7 +10,7 @@ export class Datsan{
         this.price=price;
     }
 };
-export class User{
+export class Innkeeper{
     name:string;
     gmail:string;
     address:string;
@@ -22,4 +22,43 @@ export class User{
         this.password=password;
         
     }
+}
+
+export class Quan {
+    name: string;
+    address: string;
+    linkaddress: string;
+    image:FormData;
+    constructor(name: string, address: string, linkaddress: string, image: FormData) {
+        this.name = name;
+        this.address = address;
+        this.linkaddress = linkaddress;
+        this.image = image;
+    }
+}
+export class San{
+    idquan: number;
+    name: string;
+    numberpeople:number;
+    priceperhour:number;
+    constructor(idquan: number, name: string, numberpeople: number, priceperhour: number){
+        this.idquan=idquan;
+        this.name=name;
+        this.numberpeople=numberpeople;
+        this.priceperhour=priceperhour;
+    }
+
+}
+export class San1 {
+    id: number;
+    name: string;
+    numberpeople: number;
+    priceperhour: number;
+    constructor(id: number, name: string, numberpeople: number, priceperhour: number) {
+        this.id = id;
+        this.name = name;
+        this.numberpeople = numberpeople;
+        this.priceperhour = priceperhour;
+    }
+
 }
