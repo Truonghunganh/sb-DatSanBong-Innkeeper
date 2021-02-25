@@ -6,8 +6,10 @@ import { DashboardEditQuanByTokenInnkeeperComponent } from './dashboard-edit-qua
 import { DashboardGetListSanByTokenInnkeepeAndIdquanComponent } from './dashboard-get-list-san-by-token-innkeepe-and-idquan/dashboard-get-list-san-by-token-innkeepe-and-idquan.component';
 import { DashboardAddSanByInnkeeperComponent } from './dashboard-add-san-by-innkeeper/dashboard-add-san-by-innkeeper.component';
 import { DashboardEditSanByInnkeeperComponent } from './dashboard-edit-san-by-innkeeper/dashboard-edit-san-by-innkeeper.component';
+import { DashboardDanhThuByInnkeeperComponent } from './dashboard-danh-thu-by-innkeeper/dashboard-danh-thu-by-innkeeper.component';
+import { DashboardThayDoiDatSanByInnkeeperComponent } from './dashboard-thay-doi-dat-san-by-innkeeper/dashboard-thay-doi-dat-san-by-innkeeper.component';
 
-export const containers = [DashboardComponent, DashboardInnkeeperEditComponent, DashboardInnkeeperComponent, DashboardAddQuanByInnkeeperComponent, DashboardEditQuanByTokenInnkeeperComponent, DashboardGetListSanByTokenInnkeepeAndIdquanComponent, DashboardAddSanByInnkeeperComponent, DashboardEditSanByInnkeeperComponent];
+export const containers = [DashboardComponent, DashboardInnkeeperEditComponent, DashboardInnkeeperComponent, DashboardAddQuanByInnkeeperComponent, DashboardEditQuanByTokenInnkeeperComponent, DashboardGetListSanByTokenInnkeepeAndIdquanComponent, DashboardAddSanByInnkeeperComponent, DashboardEditSanByInnkeeperComponent, DashboardDanhThuByInnkeeperComponent, DashboardThayDoiDatSanByInnkeeperComponent];
 
 export * from './dashboard/dashboard.component';
 export * from './dashboard-innkeeper-edit/dashboard-innkeeper-edit.component';
@@ -17,3 +19,5 @@ export * from './dashboard-edit-quan-by-token-innkeeper/dashboard-edit-quan-by-t
 export * from './dashboard-get-list-san-by-token-innkeepe-and-idquan/dashboard-get-list-san-by-token-innkeepe-and-idquan.component';
 export * from './dashboard-add-san-by-innkeeper/dashboard-add-san-by-innkeeper.component';
 export * from './dashboard-edit-san-by-innkeeper/dashboard-edit-san-by-innkeeper.component';
+export * from './dashboard-danh-thu-by-innkeeper/dashboard-danh-thu-by-innkeeper.component';
+export * from './dashboard-thay-doi-dat-san-by-innkeeper/dashboard-thay-doi-dat-san-by-innkeeper.component';

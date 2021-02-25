@@ -21,6 +21,7 @@ export class EditSanByInnkeepeComponent implements OnInit {
         private changeDetectorRef: ChangeDetectorRef,
         private router: Router,
         private activatedRoute: ActivatedRoute,
+        private authService: AuthService,
 
     ) {}
     id=0;
@@ -29,8 +30,21 @@ export class EditSanByInnkeepeComponent implements OnInit {
         this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
         console.log(this.id);
         
-        this.getSanByInnkeeper(this.id);
+        this.checkTokenInnkeeperAndIdsan(this.id);
     }
+
+    checkTokenInnkeeperAndIdsan(idsan: number){
+        this.authService.checkTokenInnkeeperAndIdsan(idsan).subscribe(data=>{
+            console.log(data);
+            if(data.status){
+                this.getSanByInnkeeper(idsan);
+            }else{
+                this.router.navigate(['dashboard/quans']);
+            }
+            
+        })
+    }
+
     getSanByInnkeeper(id:number){
         this.checksan=false;
         this.dashboardService.getSanByid(id).subscribe(

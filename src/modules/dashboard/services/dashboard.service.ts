@@ -6,7 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from "../../../environments/environment";
 import { Innkeeper } from '../models/dashboard.model'; 
 import { AuthService  } from '../../auth/services/auth.service'
-import { Quan } from "../models/dashboard.model";
+import { Quan,Thaydoidatsan } from "../models/dashboard.model";
 import { San,San1 } from "../models/dashboard.model";
 
 @Injectable()
@@ -56,7 +56,8 @@ export class DashboardService {
         )
     }
     
-    getQuanByInnkeeper(id: number):Observable<any>{        return this.http.get<any>(environment.url +"/api/v1/quan/"+id,this.appCommonService.httpOptions).pipe(
+    getQuanByInnkeeper(id: number):Observable<any>{
+        return this.http.get<any>(environment.url +"/api/v1/quan/"+id,this.appCommonService.httpOptions).pipe(
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
         )
     }
@@ -77,6 +78,7 @@ export class DashboardService {
         ));
     }
 
+    
     getQuanById(id: number): Observable<any> {
         return this.http.get<any>(environment.url + "/api/v1/quan/" + id,this.appCommonService.httpOptions)
             .pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
@@ -100,5 +102,19 @@ export class DashboardService {
             .pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
     }
 
+    getDanhThuByInnkeeper(idquan: number, month: any): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getDanhThuByInnkeeper", {"idquan":idquan, "time":month}, this.appCommonService.httpOptions)
+            .pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
+    }
+    getListDatSanByInnkeeper(start_time:string): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getListDatSanByInnkeeper",{"start_time":start_time},this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        )
+    }
+    thayDoiDatSanByInnkeeper(thaydoidatsan: Thaydoidatsan): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/thayDoiDatSanByInnkeeper",thaydoidatsan, this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        )
+    }
 
 }

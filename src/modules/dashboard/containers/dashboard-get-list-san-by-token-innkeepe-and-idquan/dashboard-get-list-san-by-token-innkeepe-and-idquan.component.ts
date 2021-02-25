@@ -8,5 +8,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class DashboardGetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     constructor() {}
-    ngOnInit() {}
+    ngOnInit() {
+        
+    }
 }

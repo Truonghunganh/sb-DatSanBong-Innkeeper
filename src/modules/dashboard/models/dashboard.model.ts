@@ -49,6 +49,19 @@ export class San{
     }
 
 }
+export class Thaydoidatsan{
+    idsanOld: number;
+    idsanNew: number;
+    timeOld:string;
+    timeNew:string;
+    constructor(idsanOld: number, idsanNew: number,timeOld:string,timeNew:string){
+        this.idsanOld=idsanOld;
+        this.idsanNew=idsanNew;
+        this.timeOld=timeOld;
+        this.timeNew=timeNew;
+
+    }
+}
 export class San1 {
     id: number;
     name: string;

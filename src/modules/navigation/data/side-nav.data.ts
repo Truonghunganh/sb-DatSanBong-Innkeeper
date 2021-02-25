@@ -7,7 +7,7 @@ export const sideNavSections: SideNavSection[] = [
     },
     {
         text: 'MANAGER',
-        items: ['Innkeeper'],
+        items: ['Innkeeper', 'Thaydoidatsan'],
     },
     
 ];
@@ -22,6 +22,10 @@ export const sideNavItems: SideNavItems = {
         icon: 'user',
         text: 'Innkeeper',
         link: '/dashboard/innkeeper',
+    },
+    Thaydoidatsan: {
+        text: 'Thaydoidatsan',
+        link: '/dashboard/thaydoidatsan',
     },
 
 };

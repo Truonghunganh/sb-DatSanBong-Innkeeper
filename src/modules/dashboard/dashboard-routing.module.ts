@@ -71,7 +71,17 @@ export const ROUTES: Routes = [
         canActivate: [],
         component: dashboardContainers.DashboardEditSanByInnkeeperComponent,
     },
+    {
+        path: 'danhthu/:idquan',
+        canActivate: [],
+        component: dashboardContainers.DashboardDanhThuByInnkeeperComponent,
+    },
 
+    {
+        path: 'thaydoidatsan',
+        canActivate: [],
+        component: dashboardContainers.DashboardThayDoiDatSanByInnkeeperComponent,
+    },
 
 ];
 

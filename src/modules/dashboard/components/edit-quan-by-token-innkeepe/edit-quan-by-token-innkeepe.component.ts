@@ -36,6 +36,7 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
         private changeDetectorRef: ChangeDetectorRef,
         private router: Router,
         private activatedRoute: ActivatedRoute,
+        private authService: AuthService,
 
     ) {}
     url = environment.url;
@@ -47,9 +48,18 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
         this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
         console.log(this.idquan);
         
-        this.getQuanByInnkeeper(this.idquan);
-
+        this.checktoken();
     }
+    checktoken() {
+        this.authService.checkTokenInnkeeper().subscribe(data => {
+            if (!data.status) {
+                this.router.navigate(['/auth/login']);
+            } else {
+                this.getQuanByInnkeeper(this.idquan);
+            }
+        })
+    }
+
     getQuanByInnkeeper(id: number){
         this.checkquan=false;
         this.dashboardService.getQuanByInnkeeper(id).subscribe(data=>{
@@ -58,6 +68,12 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
                 this.quan=data.quan;
                 this.checkquan=true;
                 this.changeDetectorRef.detectChanges();   
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: data.message,
+                })
+
             }
         })
     }

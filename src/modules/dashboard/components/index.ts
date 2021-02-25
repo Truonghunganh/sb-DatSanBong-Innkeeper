@@ -6,8 +6,10 @@ import { EditQuanByTokenInnkeepeComponent } from './edit-quan-by-token-innkeepe/
 import { GetListSanByTokenInnkeepeAndIdquanComponent } from './get-list-san-by-token-innkeepe-and-idquan/get-list-san-by-token-innkeepe-and-idquan.component';
 import { AddSanByInnkeeperComponent } from './add-san-by-innkeeper/add-san-by-innkeeper.component';
 import { EditSanByInnkeepeComponent } from './edit-san-by-innkeepe/edit-san-by-innkeepe.component';
+import { DanhThuByInnkeepeComponent } from './danh-thu-by-innkeepe/danh-thu-by-innkeepe.component';
+import { ThayDoiDatSanByInnkeeperComponent } from './thay-doi-dat-san-by-innkeeper/thay-doi-dat-san-by-innkeeper.component';
 
-export const components = [InnkeeperComponent, InnkeeperEditComponent, GetQuansByInnkeeperComponent, AddQuanByInnkeeperComponent, EditQuanByTokenInnkeepeComponent, GetListSanByTokenInnkeepeAndIdquanComponent, AddSanByInnkeeperComponent, EditSanByInnkeepeComponent];
+export const components = [InnkeeperComponent, InnkeeperEditComponent, GetQuansByInnkeeperComponent, AddQuanByInnkeeperComponent, EditQuanByTokenInnkeepeComponent, GetListSanByTokenInnkeepeAndIdquanComponent, AddSanByInnkeeperComponent, EditSanByInnkeepeComponent, DanhThuByInnkeepeComponent, ThayDoiDatSanByInnkeeperComponent];
 
 export * from './innkeeper/innkeeper.component';
 export * from './innkeeper-edit/innkeeper-edit.component';
@@ -17,3 +19,5 @@ export * from './edit-quan-by-token-innkeepe/edit-quan-by-token-innkeepe.compone
 export * from './get-list-san-by-token-innkeepe-and-idquan/get-list-san-by-token-innkeepe-and-idquan.component';
 export * from './add-san-by-innkeeper/add-san-by-innkeeper.component';
 export * from './edit-san-by-innkeepe/edit-san-by-innkeepe.component';
+export * from './danh-thu-by-innkeepe/danh-thu-by-innkeepe.component';
+export * from './thay-doi-dat-san-by-innkeeper/thay-doi-dat-san-by-innkeeper.component';

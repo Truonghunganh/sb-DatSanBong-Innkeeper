@@ -33,16 +33,17 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     ngayvagio: string = "";
     trackingObservable = false;
     ngOnInit() {
-        this.checktoken();
+        this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
+
+        this.checkTokenInnkeeperAndIdquan(this.idquan);
     }
-    checktoken() {
-        this.authService.checkTokenInnkeeper().subscribe(data => {
+    checkTokenInnkeeperAndIdquan(idquan: number) {
+        this.authService.checkTokenInnkeeperAndIdquan(idquan).subscribe(data => {
             console.log(data);
 
             if (!data.status) {
-                this.router.navigate(['/auth/login']);
+                this.router.navigate(['/dashboard/quans'])
             } else {
-                this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
                 this.getQuanByid(this.idquan);
                 this.ngayvagio = new Date().toISOString().slice(0, 10);
                 this.getSanByidquan(this.idquan, this.ngayvagio);
@@ -110,6 +111,8 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     addSan(){
         this.router.navigate(['/dashboard/addSan/'+ this.idquan]);
     }
-    
+    xemdanhthu() {
+        this.router.navigate(['dashboard/danhthu/' + this.idquan]);
+    }    
     
 }

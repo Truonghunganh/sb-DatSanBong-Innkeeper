@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/
 import { DashboardService } from "../../services/dashboard.service";
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../auth/services/auth.service'
 
 @Component({
     selector: 'sb-add-quan-by-innkeeper',
@@ -29,10 +30,18 @@ export class AddQuanByInnkeeperComponent implements OnInit {
 
 
     constructor(private dashboardService: DashboardService,
+        private authService: AuthService,
          private router: Router) {
     }
    
-    ngOnInit() {}
+    ngOnInit() {
+        this.authService.checkTokenInnkeeper().subscribe(data=>{
+            if (!data.status) {
+                this.router.navigate(['/auth/login']);
+            }
+        })
+    }
+
     Add(name: string, address:string, linkaddress: string){
         
         console.log(name);
