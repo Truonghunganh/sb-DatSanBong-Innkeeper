@@ -102,7 +102,7 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
     }
 
     Cancel(){
-
+        this.router.navigate(['/dashboard/quans'])
     }
     Save(){
         Swal.fire({

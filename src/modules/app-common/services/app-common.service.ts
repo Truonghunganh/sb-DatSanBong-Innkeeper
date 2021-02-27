@@ -25,12 +25,11 @@ export class AppCommonService {
 
         }),
     };
-    public httpOptions1 = {
-        headers: new HttpHeaders({
-            'Content-Type': 'multipart/form-data', 'Cache-Control': 'no-cache', 'Pragma': 'no-cache'
-        })
-    };
     errorHandler(error: HttpErrorResponse) {
         return throwError(error.message || 'Serve error');
     }
+    setToken(token:string) {
+        this.storage.set('tokenInnkeeper', JSON.stringify(token));    
+    }
+
 }

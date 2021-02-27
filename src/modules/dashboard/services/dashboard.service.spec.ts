@@ -12,11 +12,4 @@ describe('DashboardService', () => {
         dashboardService = TestBed.inject(DashboardService);
     });
 
-    describe('getDashboard$', () => {
-        it('should return Observable<Dashboard>', () => {
-            dashboardService.getDashboard$().subscribe(response => {
-                expect(response).toEqual({});
-            });
-        });
-    });
 });
