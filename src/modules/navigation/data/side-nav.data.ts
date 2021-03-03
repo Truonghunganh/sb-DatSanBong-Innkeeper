@@ -15,16 +15,16 @@ export const sideNavSections: SideNavSection[] = [
 export const sideNavItems: SideNavItems = {
     Dashboard: {
         icon: 'arrows-alt',
-        text: 'Dashboard',
+        text: 'Danh sách các quán đang hoạt động',
         link: '/dashboard/quans',
     },
     Innkeeper: {
         icon: 'user',
-        text: 'Innkeeper',
+        text: 'thông tin chủ quán',
         link: '/dashboard/innkeeper',
     },
     Thaydoidatsan: {
-        text: 'Thaydoidatsan',
+        text: 'Thay đổi đặt sân',
         link: '/dashboard/thaydoidatsan',
     },
 

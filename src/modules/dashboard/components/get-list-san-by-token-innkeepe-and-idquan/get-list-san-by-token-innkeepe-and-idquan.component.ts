@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@
 import { DashboardService } from "../../services/dashboard.service";
 import { map } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment';
-import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Datsan } from '../../models/dashboard.model'
@@ -19,7 +18,6 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
         private dashboardService: DashboardService,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private location: Location,
         private ref: ChangeDetectorRef,
         private authService: AuthService,
     ) { }

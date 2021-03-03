@@ -83,6 +83,8 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
     getListDatSanByInnkeeperNew(start_time: string) {
         this.checkdatsansNew = false;
         this.dashboardService.getListDatSanByInnkeeper(start_time).subscribe(data => {
+            console.log(data);
+            
             if (data.status) {
                 this.listdatsancuaquanNew = data.datsans;
                 const arrMangNew = new Array();

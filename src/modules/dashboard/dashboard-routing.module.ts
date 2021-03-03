@@ -19,7 +19,7 @@ export const ROUTES: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/dashboard/quan',
+        redirectTo: '/dashboard/quans',
         //redirectTo: 'quan/:iduser',
     },
 
@@ -72,7 +72,7 @@ export const ROUTES: Routes = [
         component: dashboardContainers.DashboardEditSanByInnkeeperComponent,
     },
     {
-        path: 'danhthu/:idquan',
+        path: 'doanhthu/:idquan',
         canActivate: [],
         component: dashboardContainers.DashboardDanhThuByInnkeeperComponent,
     },
@@ -81,6 +81,13 @@ export const ROUTES: Routes = [
         path: 'thaydoidatsan',
         canActivate: [],
         component: dashboardContainers.DashboardThayDoiDatSanByInnkeeperComponent,
+    },
+
+
+    {
+        path: 'thongtindatsan/:idquan',
+        canActivate: [],
+        component: dashboardContainers.DashboardThongTinDatSanComponent,
     },
 
 ];

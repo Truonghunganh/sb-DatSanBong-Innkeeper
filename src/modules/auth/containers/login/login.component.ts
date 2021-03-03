@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User} from './../../models/auth.model';
@@ -14,23 +14,30 @@ import { AuthService } from './../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
     loginFormGroup: any;
+    checklogin = false;
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthService,
-        private router: Router
-    ) {}
+        private router: Router,
+        private changeDetectorRef: ChangeDetectorRef
+
+    ) { }
     ngOnInit() {
         
         this.loginFormGroup = this.formBuilder.group({
             phone: ['', Validators.required],
             password: ['', Validators.required],
         });
+        this.checklogin=false;
         this.authService.checkTokenInnkeeper().subscribe(
             result => {
                 console.log(result);
                 
                 if (result.status) {
-                    this.router.navigate(['/dashboard/innkeeper']);
+                    this.router.navigate(['/dashboard/quans']);
+                }else{
+                    this.checklogin=true;
+                    this.changeDetectorRef.detectChanges();
                 }
                 
             }
@@ -41,9 +48,7 @@ export class LoginComponent implements OnInit {
         const user=new User(phone,password);
         this.authService.login(user).subscribe(result => {
             if (result.status) {
-                console.log(result);
-                
-                //this.router.navigate(['/dashboard/quan']);
+                this.router.navigate(['/dashboard/quans']);
             } else {
                 Swal.fire({
                     icon: 'error',

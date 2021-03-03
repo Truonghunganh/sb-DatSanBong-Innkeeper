@@ -117,4 +117,15 @@ export class DashboardService {
         )
     }
 
+    getAllDatSanByInnkeeperAndIdquan(idquan: number, trangthai: boolean, time: string): Observable<any>{
+        return this.http.post<any>(environment.url + "/api/v1/getAllDatSanByInnkeeperAndIdquan", {"idquan": idquan, "trangthai": trangthai, "time": time}, this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        )
+    }
+
+    xacNhanDatsanByInnkeeper(iddatsan: number): Observable<any> {
+        return this.http.put<any>(environment.url + "/api/v1/xacNhanDatsanByInnkeeper", { "iddatsan": iddatsan}, this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        )
+    }
 }
