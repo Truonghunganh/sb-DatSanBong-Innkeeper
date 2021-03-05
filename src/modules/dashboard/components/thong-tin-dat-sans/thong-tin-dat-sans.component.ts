@@ -33,20 +33,19 @@ export class ThongTinDatSansComponent implements OnInit {
     ngOnInit() {
         this.time = new Date().toISOString().slice(0, 10)+" 00:00:00";
         this.idquan= Number(this.activatedRoute.snapshot.paramMap.get('idquan'))
-        this.checktoken();
+        this.checktoken(this.idquan);
 
     }
-    checktoken() {
-        this.authService.checkTokenInnkeeper().subscribe(data => {
-            
+    checktoken(idquan: number) {
+        this.authService.checkTokenInnkeeperAndIdquan(idquan).subscribe(data => {
             if (!data.status) {
-                this.router.navigate(['/auth/login']);
+                this.router.navigate(['/dashboard/quans'])
             } else {
                 this.getAllDatSanByInnkeeperAndIdquan(this.idquan,this.trangthai,this.time);
             }
         })
     }
-
+    
     getAllDatSanByInnkeeperAndIdquan(idquan: number,trangthai:boolean,time:string){
         this.checkdatsans=false;
         this.dashboardService.getAllDatSanByInnkeeperAndIdquan(idquan,trangthai,time).subscribe(data=>{

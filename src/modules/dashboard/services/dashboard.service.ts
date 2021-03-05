@@ -68,8 +68,8 @@ export class DashboardService {
         );
     }
     
-    getsanByidquan(idquan: number, ngay: any): Observable<any> {
-        return this.http.get<any>(environment.url + "/api/v1/san?idquan=" + idquan + "&start_time=" + ngay)
+    getDatSansvaSansByInnkeeperAndIdquanAndNgay(idquan: number, ngay: any): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getDatSansvaSansByInnkeeperAndIdquanAndNgay",{"idquan": idquan , "start_time":ngay},this.appCommonService.httpOptions)
             .pipe(
                 tap(data => {
                     of(data);
@@ -102,8 +102,8 @@ export class DashboardService {
             .pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
     }
 
-    getDanhThuByInnkeeper(idquan: number, month: any): Observable<any> {
-        return this.http.post<any>(environment.url + "/api/v1/getDanhThuByInnkeeper", {"idquan":idquan, "time":month}, this.appCommonService.httpOptions)
+    getDoanhThuByInnkeeper(idquan: number, month: any): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getDoanhThuByInnkeeper", {"idquan":idquan, "time":month}, this.appCommonService.httpOptions)
             .pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
     }
     getListDatSanByInnkeeper(start_time:string): Observable<any> {
@@ -125,6 +125,12 @@ export class DashboardService {
 
     xacNhanDatsanByInnkeeper(iddatsan: number): Observable<any> {
         return this.http.put<any>(environment.url + "/api/v1/xacNhanDatsanByInnkeeper", { "iddatsan": iddatsan}, this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        )
+    }
+
+    getTongDoanhThuTheoNamByInnkeeper(idquan: number, nam: number): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getTongDoanhThuTheoNamByInnkeeper", {"idquan": idquan,"nam": nam}, this.appCommonService.httpOptions).pipe(
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
         )
     }

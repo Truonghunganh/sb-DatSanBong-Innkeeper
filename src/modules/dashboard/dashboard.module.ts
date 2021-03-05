@@ -23,6 +23,7 @@ import * as dashboardServices from './services';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { HttpClientModule } from '@angular/common/http';
+import { ChartsModule } from 'ng2-charts';
 
 import { FilePondModule, registerPlugin } from 'ngx-filepond';
 
@@ -46,6 +47,7 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
         FullCalendarModule,
         NavigationModule,
         FilePondModule,
+        ChartsModule,
 
     ],
     providers: [...dashboardServices.services, ...dashboardGuards.guards],

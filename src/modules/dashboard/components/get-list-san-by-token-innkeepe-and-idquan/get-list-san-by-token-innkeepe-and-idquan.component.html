@@ -1,36 +1,37 @@
 <h1 style="color:chartreuse">1 .Thông tin của Quán
     <input type="button" class="btn btn-primary float-right" (click)="addSan()"
-     value="Add Sân" />
+     value="thêm Sân" />
     <input type="button" class="btn btn-success float-right" (click)="xemdanhthu()"
          value="xem danh thu của quán" />
+    <input type="button" class="btn btn-danger float-right" (click)="xemdanhsachdatsan()" value="Xem danh sách đặt sân" />
 </h1>
 <sb-card>
     <div class="card-body">
-        <div *ngIf="quanByid$ | async; then display2; else loading2"></div>
+        <div *ngIf="checkquan then display2; else loading2"></div>
         <ng-template #display2>
             <div class="text-center">
                 <table style="width: 100%;" border="1">
                     <tr>
                         <td style="text-align: center;" rowspan="3">
-                            <div *ngIf="quanByid.image">
-                                <img style="width: 150px; " src="{{url+'/'+quanByid.image}}">
+                            <div *ngIf="quan.image">
+                                <img style="width: 150px; " src="{{url+'/'+quan.image}}">
                             </div>
-                            <div *ngIf="!quanByid.image">
+                            <div *ngIf="!quan.image">
                                 <img class="profile_img" src="../../../assets/img/avatar.jpg">
                             </div>
                         </td>
                         <td style="text-align: center;">full_name</td>
-                        <td style="text-align: center;"> <strong>{{ quanByid.name }}</strong></td>
+                        <td style="text-align: center;"> <strong>{{ quan.name }}</strong></td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">Phone</td>
-                        <td style="text-align: center;"><strong>{{ quanByid.phone}}</strong></td>
+                        <td style="text-align: center;"><strong>{{ quan.phone}}</strong></td>
                     </tr>
                     <tr>
                         <td style="text-align: center;">address</td>
                         <td style="text-align: center;">
-                            <a href="{{quanByid.linkaddress}}">
-                                <strong>{{ quanByid.address}}</strong>
+                            <a href="{{quan.linkaddress}}">
+                                <strong>{{ quan.address}}</strong>
                             </a>
                         </td>
                     </tr>
@@ -57,7 +58,7 @@
 <sb-card>
 
     <div class="card-body">
-        <div *ngIf="trackingObservable then display; else loading"></div>
+        <div *ngIf="checkdatsan then display; else loading"></div>
         <ng-template #display>
             <table style="width: 100%;" border="1">
                 <tr>
@@ -79,75 +80,59 @@
                     <td style="text-align: center;width: 6%;">19h</td>
                     <td style="text-align: center;width: 6%;">20h</td>
                 </tr>
-                <tr *ngFor="let san of listsanByidquan ;index as i; trackBy: trackByListSan">
+                <tr *ngFor="let san of listsanByidquan ;index as i">
                     <td>
                         {{san.name}}
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][0]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][0]"
+                            class="btdt" (click)="hienthongtindatsan(mangDatsan[i][0],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][1]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][1]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][1],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][2]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][2]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][2],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][3]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][3]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][3],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][4]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][4]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][4],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][5]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][5]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][5],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][6]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][6]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][6],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][7]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][7]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][7],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][8]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][8]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][8],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][9]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][9]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][9],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][10]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][10]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][10],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][11]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][11]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][11],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][12]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][12]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][12],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][13]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][13]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][13],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][14]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][14]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][14],san)">đã đặt</button>
                     </td>
                     <td style="background-color: #41c04d;">
-                        <button *ngIf="!mangDatsan[i][15]"
-                            class="btdt">chưa đặt</button>
+                        <button *ngIf="mangDatsan[i][15]" class="btdt" (click)="hienthongtindatsan(mangDatsan[i][15],san)">đã đặt</button>
                     </td>
-
                 </tr>
             </table>
 
@@ -165,7 +150,7 @@
 <h1 style="color:red">3 .Danh sách các sân bóng</h1>
 <sb-card>
     <div class="card-body">
-        <div *ngIf="listsanByidquan; then display1; else loading1"></div>
+        <div *ngIf="checkdatsan; then display1; else loading1"></div>
         <ng-template #display1>
             <div class="row">
                 <div class="col-md-4 pd-checkbox" *ngFor="let san of listsanByidquan">

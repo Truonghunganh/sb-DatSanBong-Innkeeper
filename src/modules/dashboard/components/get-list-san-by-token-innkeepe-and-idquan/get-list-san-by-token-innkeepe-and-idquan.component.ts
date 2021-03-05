@@ -23,35 +23,37 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     ) { }
     idquan = 1;
     listsanByidquan: any;
-    quanByid$: any;
-    quanByid: any;
+    quan: any;
+    checkquan=false;
     url = environment.url;
     mangDatsan = new Array();
     today = new Date().toISOString().slice(0, 10);
     ngayvagio: string = "";
-    trackingObservable = false;
+    checkdatsan = false;
     ngOnInit() {
         this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
 
         this.checkTokenInnkeeperAndIdquan(this.idquan);
     }
     checkTokenInnkeeperAndIdquan(idquan: number) {
+        this.checkquan=false;
         this.authService.checkTokenInnkeeperAndIdquan(idquan).subscribe(data => {
             console.log(data);
 
             if (!data.status) {
                 this.router.navigate(['/dashboard/quans'])
             } else {
-                this.getQuanByid(this.idquan);
+                this.quan=data.quan;
+                this.checkquan=true;
                 this.ngayvagio = new Date().toISOString().slice(0, 10);
-                this.getSanByidquan(this.idquan, this.ngayvagio);
+                this.getDatSansvaSansByInnkeeperAndIdquanAndNgay(this.idquan, this.ngayvagio);
             }
         })
     }
     chonngay(ngay: any) {
         this.ngayvagio = ngay.target.value;
         console.log(ngay.target.value);
-        this.getSanByidquan(this.idquan, ngay.target.value);
+        this.getDatSansvaSansByInnkeeperAndIdquanAndNgay(this.idquan, ngay.target.value);
 
     }
 
@@ -84,33 +86,41 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
         return array;
     }
 
-    getSanByidquan(idquan: number, ngay: any) {
+    getDatSansvaSansByInnkeeperAndIdquanAndNgay(idquan: number, ngay: any) {
 
-        this.trackingObservable = false;
+        this.checkdatsan = false;
 
-        this.dashboardService.getsanByidquan(idquan, ngay).subscribe(result => {
-            if (result.status) {
-                const arrMang = new Array();
-                for (let i = 0; i < result.datsans.length; i++) {
-                    arrMang[i] = this.mangdatsancuamotsan(result.datsans[i]);
-                }
-                this.mangDatsan = arrMang;
-                this.listsanByidquan = result.san;
-                this.trackingObservable = true;
+        this.dashboardService.getDatSansvaSansByInnkeeperAndIdquanAndNgay(idquan, ngay).subscribe(data => {
+            
+            if (data.status) {
+                this.mangDatsan = data.datsans;
+                this.listsanByidquan = data.sans;
+                this.checkdatsan = true;
                 this.ref.detectChanges();
             }
 
         })
     }
-
-    getQuanByid(id: number) {
-        this.quanByid$ = this.dashboardService.getQuanById(id).pipe(map(result => this.quanByid = result.quan));
+    hienthongtindatsan(datsan:any,san:any){
+        console.log(datsan);
+        Swal.fire({
+            html: '<h1 style="color: #41c04d;">thông tin người đặt sân của người dùng</h1><table style="width: 100%;" border="1"><tr><td>tên người đặt </td><td>' + datsan.user.name + '</td></tr><tr><td>Số điện thoại người đặt </td><td>' + datsan.user.phone + '</td></tr><tr><td>Gmail người đặt </td><td>' + datsan.user.gmail + '</td></tr><tr><td>Địa chỉ người đặt </td><td>' + datsan.user.address + '</td></tr><tr><td>tên quán </td><td>' + this.quan.name + '</td></tr><tr><td>tên sân </td><td>' + san.name + '</td></tr><tr><td>số người </td><td>' + san.numberpeople + '</td></tr><tr><td>số tiền thanh toán</td><td>' + san.priceperhour + '</td></tr><tr><td>giờ đặt</td><td>' +datsan.start_time + '</td></tr></table>',
+            confirmButtonText: `Ok`,
+        })
+        
+        
     }
+
     addSan(){
         this.router.navigate(['/dashboard/addSan/'+ this.idquan]);
     }
     xemdanhthu() {
-        this.router.navigate(['dashboard/danhthu/' + this.idquan]);
-    }    
+        this.router.navigate(['dashboard/doanhthu/' + this.idquan]);
+    } 
+    xemdanhsachdatsan(){
+        this.router.navigate(['dashboard/thongtindatsan/' + this.idquan]);
+    }   
+
+
     
 }
