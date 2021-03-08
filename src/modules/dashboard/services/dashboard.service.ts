@@ -79,8 +79,8 @@ export class DashboardService {
     }
 
     
-    getQuanById(id: number): Observable<any> {
-        return this.http.get<any>(environment.url + "/api/v1/quan/" + id,this.appCommonService.httpOptions)
+    getQuanByIdAndTokenInnkeeper(id: number): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getQuanByIdAndTokenInnkeeper",{"idquan":id} ,this.appCommonService.httpOptions)
             .pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
     }
     addSanByInnkeeper(san:San): Observable<any> {
