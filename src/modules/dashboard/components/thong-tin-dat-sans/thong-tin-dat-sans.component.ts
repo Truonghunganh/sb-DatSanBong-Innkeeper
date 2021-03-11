@@ -52,11 +52,69 @@ export class ThongTinDatSansComponent implements OnInit {
             console.log(data);
             if(data.status){
                 this.datsans=data.datsans;
+                this.taodatsansnew(this.page);
                 this.checkdatsans=true;
                 this.changeDetectorRef.detectChanges();
             }  
         })
     }
+    datsansnew:any;
+    page = 1;
+    tongpage = 0;
+    mangtrang: any;
+    taodatsansnew(page: number){
+        this.datsansnew=[];
+        this.tongpage=this.datsans.length/10;
+        let i=(page-1)*10;
+        let h=i;
+        let k;
+        if (i==0) {
+            h=1;
+            k=this.datsans.length/h;
+        } else {
+            k=this.datsans.length%h;
+        }
+
+        for (let j = 0; j < k; j++) {
+            if (j==10) {
+                break;
+            }
+            this.datsansnew.push(this.datsans[i+j]);
+            
+        }
+        console.log(this.datsansnew);
+        
+        this.taomangtrang(page);
+    }
+    taomangtrang(page: number) {
+        var mang: Array<boolean> = [];
+        for (let i = 0; i < this.tongpage; i++) {
+            mang.push(false);
+
+        }
+        mang[page - 1] = true;
+        this.mangtrang = mang;
+
+    }
+    Previous() {
+        if (this.page > 1) {
+            this.page--;
+            this.taodatsansnew(this.page);
+        }
+    }
+    Next() {
+        if (this.page < this.tongpage) {
+            this.page++;
+            this.taodatsansnew(this.page);
+        }
+    }
+    chontrang(page: number) {
+        console.log(page);
+        
+        this.page = page;
+        this.taodatsansnew(this.page);
+    }
+
     xacnhan(iddatsan: number){
         console.log(iddatsan);
         

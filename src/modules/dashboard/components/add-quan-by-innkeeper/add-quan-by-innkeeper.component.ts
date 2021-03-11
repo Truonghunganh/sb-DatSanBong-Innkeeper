@@ -41,16 +41,17 @@ export class AddQuanByInnkeeperComponent implements OnInit {
             }
         })
     }
-
-    Add(name: string, address:string, linkaddress: string){
+    Add(name: string, address: string, linkaddress: string, vido: string, kinhdo: string){
         
-        console.log(name);
+        console.log(vido);
         
         const formData = new FormData();
         formData.append('image', this.file,this.file.name);
         formData.append('name', name);
         formData.append('address', address);
         formData.append('linkaddress', linkaddress);
+        formData.append('vido', vido);
+        formData.append('kinhdo', kinhdo);
         this.dashboardService.addQuanByInnkeeper(formData).subscribe(data=>{
             console.log(data);
             

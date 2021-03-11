@@ -32,29 +32,20 @@ export class AddSanByInnkeeperComponent implements OnInit {
     url = environment.url;
     idquan=0;
     checkTokenInnkeeperAndIdquan(idquan: number) {
+        this.checkquan = false;
         this.authService.checkTokenInnkeeperAndIdquan(idquan).subscribe(data => {
             console.log(data);
 
             if (!data.status) {
                 this.router.navigate(['/dashboard/quans' ])
             } else {
-                this.getQuanByInnkeeper(idquan);
+                this.quan = data.quan;
+                this.checkquan = true;
+                this.changeDetectorRef.detectChanges();
             }
         })
     }
 
-    getQuanByInnkeeper(id: number){
-        this.checkquan=false;
-        this.dashboardService.getQuanById(id).subscribe(data=>{
-            console.log(data);
-            if(data.status){
-                this.quan=data.quan;
-                this.checkquan=true;
-                this.changeDetectorRef.detectChanges();
-            }
-          
-        })
-    }
     Cancel(){
         this.router.navigate(['/dashboard/quans/'+this.idquan]);
     }

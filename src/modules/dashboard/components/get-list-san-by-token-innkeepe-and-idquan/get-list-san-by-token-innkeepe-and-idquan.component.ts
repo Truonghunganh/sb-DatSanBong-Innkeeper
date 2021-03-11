@@ -22,7 +22,7 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
         private authService: AuthService,
     ) { }
     idquan = 1;
-    listsanByidquan: any;
+    sans: any;
     quan: any;
     checkquan=false;
     url = environment.url;
@@ -44,6 +44,8 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
                 this.router.navigate(['/dashboard/quans'])
             } else {
                 this.quan=data.quan;
+                this.reviewquan = Math.round(data.quan.review);
+                this.mangreviewquan = this.taomotmangreview(this.reviewquan);
                 this.checkquan=true;
                 this.ngayvagio = new Date().toISOString().slice(0, 10);
                 this.getDatSansvaSansByInnkeeperAndIdquanAndNgay(this.idquan, this.ngayvagio);
@@ -58,53 +60,38 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     }
 
 
-    mangdatsancuamotsan(san: any) {
-        let array = new Array(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
-        for (let i = 0; i < san.length; i++) {
-            switch (san[i].start_time.slice(11, 13)) {
-                case "05": array[0] = true; break;
-                case "06": array[1] = true; break;
-                case "07": array[2] = true; break;
-                case "08": array[3] = true; break;
-                case "09": array[4] = true; break;
-                case "10": array[5] = true; break;
-                case "11": array[6] = true; break;
-                case "12": array[7] = true; break;
-                case "13": array[8] = true; break;
-                case "14": array[9] = true; break;
-                case "15": array[10] = true; break;
-                case "16": array[11] = true; break;
-                case "17": array[12] = true; break;
-                case "18": array[13] = true; break;
-                case "19": array[14] = true; break;
-                case "20": array[15] = true; break;
-
-                default:
-                    break;
-            }
-        }
-        return array;
-    }
 
     getDatSansvaSansByInnkeeperAndIdquanAndNgay(idquan: number, ngay: any) {
-
         this.checkdatsan = false;
-
         this.dashboardService.getDatSansvaSansByInnkeeperAndIdquanAndNgay(idquan, ngay).subscribe(data => {
-            
             if (data.status) {
                 this.mangDatsan = data.datsans;
-                this.listsanByidquan = data.sans;
+                this.sans = data.sans;
                 this.checkdatsan = true;
                 this.ref.detectChanges();
             }
-
         })
     }
+    mangreviewquan: any;
+    reviewquan = 0;
+
+    taomotmangreview(review: number) {
+        switch (review) {
+            case 0: return [false, false, false, false, false];
+            case 1: return [true, false, false, false, false];
+            case 2: return [true, true, false, false, false];
+            case 3: return [true, true, true, false, false];
+            case 4: return [true, true, true, true, false];
+            case 5: return [true, true, true, true, true];
+            default:
+                break;
+        }
+    }
+
     hienthongtindatsan(datsan:any,san:any){
         console.log(datsan);
         Swal.fire({
-            html: '<h1 style="color: #41c04d;">thông tin người đặt sân của người dùng</h1><table style="width: 100%;" border="1"><tr><td>tên người đặt </td><td>' + datsan.user.name + '</td></tr><tr><td>Số điện thoại người đặt </td><td>' + datsan.user.phone + '</td></tr><tr><td>Gmail người đặt </td><td>' + datsan.user.gmail + '</td></tr><tr><td>Địa chỉ người đặt </td><td>' + datsan.user.address + '</td></tr><tr><td>tên quán </td><td>' + this.quan.name + '</td></tr><tr><td>tên sân </td><td>' + san.name + '</td></tr><tr><td>số người </td><td>' + san.numberpeople + '</td></tr><tr><td>số tiền thanh toán</td><td>' + san.priceperhour + '</td></tr><tr><td>giờ đặt</td><td>' +datsan.start_time + '</td></tr></table>',
+            html: '<h1 style="color: #41c04d;">thông tin người đặt sân của người dùng</h1><table style="width: 100%;" border="1"><tr><td>tên người đặt </td><td>' + datsan.user.name + '</td></tr><tr><td>Số điện thoại người đặt </td><td>' + datsan.user.phone + '</td></tr><tr><td>tên sân </td><td>' + san.name + '</td></tr><tr><td>số người </td><td>' + san.numberpeople + '</td></tr><tr><td>số tiền thanh toán</td><td>' + san.priceperhour + '</td></tr><tr><td>giờ đặt</td><td>' +datsan.start_time + '</td></tr></table>',
             confirmButtonText: `Ok`,
         })
         

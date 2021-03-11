@@ -38,7 +38,7 @@ export class AuthService {
                 if(data.status){                    
                     this.storage.set('tokenInnkeeper', JSON.stringify(data.token));                    
                 }
-                return of(data);
+                of(data);
             }),
             catchError(this.appCommonService.errorHandler)
         )
