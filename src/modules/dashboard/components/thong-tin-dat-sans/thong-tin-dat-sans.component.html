@@ -13,7 +13,7 @@
                     <table class="table table-striped " style="width:100%">
                         <thead>
                             <tr>
-                                <td>id</td>
+                                <td>STT</td>
                                 <td>Tên sân</td>
                                 <td>Số người</td>
                                 <td>Tiền</td>
@@ -24,8 +24,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let datsan of datsansnew">
-                                <td>{{datsan.id}}</td>
+                            <tr *ngFor="let datsan of datsansnew ; index as i">
+                                <td>{{(page-1)*10+i+1}}</td>
                                 <td>{{datsan.san.name}}</td>
                                 <td>{{datsan.san.numberpeople}}</td>
                                 <td>{{datsan.price}}</td>
@@ -64,7 +64,7 @@
                     <table class="table table-striped " style="width:100%">
                         <thead>
                             <tr>
-                                <td>id</td>
+                                <td>STT</td>
                                 <td>Tên sân</td>
                                 <td>Số người</td>
                                 <td>Tiền</td>
@@ -76,8 +76,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let datsan of datsansnew">
-                                <td>{{datsan.id}}</td>
+                            <tr *ngFor="let datsan of datsansnew ; index as i">
+                                <td>{{(page-1)*10+i+1}}</td>
                                 <td>{{datsan.san.name}}</td>
                                 <td>{{datsan.san.numberpeople}}</td>
                                 <td>{{datsan.price}}</td>
@@ -86,7 +86,7 @@
                                 <td>{{datsan.start_time}}</td>
                                 <td>
                                     <input type="button" class="btn btn-primary" (click)="xacnhan(datsan.id)"
-                                        value="xán nhận" />
+                                        value="xác nhận" />
                                 </td>
                                 <td>
                                     <fa-icon (click)="deleteDatSan(datsan)" [icon]='["fas","trash"]'

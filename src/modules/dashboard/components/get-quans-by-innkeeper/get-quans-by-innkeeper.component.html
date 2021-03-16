@@ -3,53 +3,48 @@
         <div *ngIf="checkquans; then display; else loading"></div>
         <ng-template #display>
             <div class="row">
-                <div class="col-md-4 pd-checkbox" *ngFor="let quan of listquans"
+                <div class="card" style="width: 22rem;" *ngFor="let quan of quansnew; index as i;"
                     routerLink="/dashboard/quans/{{quan.id}}">
-                    <label class="customer-checkbox">
-                        <div class="row">
-                            <div>
-                                <sb-card>
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <div>
-                                                <br>
-                                                <div *ngIf="quan.image">
-                                                    <img style="width: 150px; height: 150px;" src="{{url+'/'+quan.image}}">
-                                                </div>
-                                                <div *ngIf="!quan.image">
-                                                    <img style="width: 150px; height: 150px;" class="profile_img" src="../../../assets/img/avatar.jpg">
-                                                </div>
-                                                <br>
-                                                <table class="table table-striped ">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Tên</td>
-                                                            <td> <strong>{{ quan.name }}</strong></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Số điện thoại</td>
-                                                            <td><strong>{{ quan.phone}}</strong></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Địa chỉ</td>
-                                                            <td><strong>{{ quan.address }}</strong></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div>
-                                                <fa-icon routerLink="/dashboard/editQuanByTokenInnkeeper/{{quan.id}}" class='fas fa-trash fa-2x'
-                                                    [icon]='["fas","edit"]'></fa-icon>
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </sb-card>
-                                &emsp;
-                            </div>
-                        </div>
-                    </label>
+                    <div *ngIf="quan.image">
+                        <img class="card-img-top" style="width: 22rem; height: 18rem" src="{{url+'/'+quan.image}}"
+                            alt="Card image cap">
+                    </div>
+                    <div *ngIf="!quan.image">
+                        <img class="card-img-top" style="width: 22rem; height: 18rem"
+                            src="../../../assets/img/avatar.jpg" alt="Card image cap">
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped ">
+                            <tbody>
+                                <tr>
+                                    <td>Tên</td>
+                                    <td> <strong>{{ quan.name }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Số điện thoại</td>
+                                    <td><strong>{{ quan.phone}}</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Địa chỉ</td>
+                                    <td><strong>{{ quan.address }}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card__rating" style="text-align: center;">
+                        <img *ngIf="mangreview[i][0]" src="../../../assets/img/reviews/Star_full.svg" class="star">
+                        <img *ngIf="!mangreview[i][0]" src="../../../assets/img/reviews/0-star.svg" class="star">
+                        <img *ngIf="mangreview[i][1]" src="../../../assets/img/reviews/Star_full.svg" class="star">
+                        <img *ngIf="!mangreview[i][1]" src="../../../assets/img/reviews/0-star.svg" class="star">
+                        <img *ngIf="mangreview[i][2]" src="../../../assets/img/reviews/Star_full.svg" class="star">
+                        <img *ngIf="!mangreview[i][2]" src="../../../assets/img/reviews/0-star.svg" class="star">
+                        <img *ngIf="mangreview[i][3]" src="../../../assets/img/reviews/Star_full.svg" class="star">
+                        <img *ngIf="!mangreview[i][3]" src="../../../assets/img/reviews/0-star.svg" class="star">
+                        <img *ngIf="mangreview[i][4]" src="../../../assets/img/reviews/Star_full.svg" class="star">
+                        <img *ngIf="!mangreview[i][4]" src="../../../assets/img/reviews/0-star.svg" class="star">
+                    </div>
                 </div>
+
             </div>
         </ng-template>
         <ng-template #loading>
@@ -59,5 +54,24 @@
                 </div>
             </div>
         </ng-template>
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" (click)="Previous()">Previous</a>
+                </li>
+                <div *ngFor="let vitri of mangtrang; index as i">
+                    <li *ngIf="vitri" class="page-item active">
+                        <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                    </li>
+                    <li *ngIf="!vitri" class="page-item">
+                        <a class="page-link" (click)="chontrang(i+1)">{{i+1}} </a>
+                    </li>
+                </div>
+                <li class="page-item">
+                    <a class="page-link" (click)="Next()">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
+
 </sb-card>

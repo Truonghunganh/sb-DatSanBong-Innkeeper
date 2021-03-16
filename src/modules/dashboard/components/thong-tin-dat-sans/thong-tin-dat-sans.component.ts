@@ -55,6 +55,8 @@ export class ThongTinDatSansComponent implements OnInit {
                 this.taodatsansnew(this.page);
                 this.checkdatsans=true;
                 this.changeDetectorRef.detectChanges();
+                console.log(this.page);
+                
             }  
         })
     }
@@ -66,13 +68,13 @@ export class ThongTinDatSansComponent implements OnInit {
         this.datsansnew=[];
         this.tongpage=this.datsans.length/10;
         let i=(page-1)*10;
-        let h=i;
         let k;
-        if (i==0) {
-            h=1;
-            k=this.datsans.length/h;
+        if (page < this.tongpage) {
+            k = 10;
         } else {
-            k=this.datsans.length%h;
+            k = this.datsans.length % 10;
+            console.log(k);
+
         }
 
         for (let j = 0; j < k; j++) {

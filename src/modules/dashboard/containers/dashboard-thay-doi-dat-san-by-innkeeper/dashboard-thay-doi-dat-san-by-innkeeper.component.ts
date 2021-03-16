@@ -8,5 +8,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class DashboardThayDoiDatSanByInnkeeperComponent implements OnInit {
     constructor() {}
-    ngOnInit() {}
+    ngOnInit() {
+
+    }
+    
 }

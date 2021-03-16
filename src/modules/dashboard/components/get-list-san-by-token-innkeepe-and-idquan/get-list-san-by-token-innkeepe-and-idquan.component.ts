@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DashboardService } from "../../services/dashboard.service";
-import { map } from 'rxjs/operators';
 import { environment } from './../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Datsan } from '../../models/dashboard.model'
 import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({

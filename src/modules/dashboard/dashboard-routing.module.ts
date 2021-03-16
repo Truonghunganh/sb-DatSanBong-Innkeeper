@@ -89,6 +89,8 @@ export const ROUTES: Routes = [
         canActivate: [],
         component: dashboardContainers.DashboardThongTinDatSanComponent,
     },
+    
+
 
 ];
 

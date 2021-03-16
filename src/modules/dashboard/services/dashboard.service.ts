@@ -134,4 +134,9 @@ export class DashboardService {
             tap(data => of(data)), catchError(this.appCommonService.errorHandler)
         )
     }
+    getChiTietDanhthuByInnkeeper(id: number): Observable<any> {
+        return this.http.post<any>(environment.url + "/api/v1/getChiTietDanhthuByInnkeeper", { "id": id}, this.appCommonService.httpOptions).pipe(
+            tap(data => of(data)), catchError(this.appCommonService.errorHandler)
+        )
+    }
 }
