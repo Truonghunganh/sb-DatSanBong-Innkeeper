@@ -99,6 +99,10 @@ export class DanhThuByInnkeepeComponent implements OnInit {
         this.authService.checkTokenInnkeeperAndIdquan(idquan).subscribe(data => {
             if (!data.status) {
                 this.router.navigate(['/dashboard/quans'])
+                Swal.fire({
+                    icon: 'error',
+                    title: data.message,
+                })
 
             }  else {
                 this.quan=data.quan;
@@ -172,12 +176,9 @@ export class DanhThuByInnkeepeComponent implements OnInit {
                 console.log(this.tongDanhthu);
                 for (let i = 0; i < this.doanhthus.length; i++) {
                     this.doanhthus[i].doanhthu = this.doanhthus[i].doanhthu.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
                 }
-
                 this.checkdoanhthus=true;
                 this.changeDetectorRef.detectChanges();
-
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -221,15 +222,27 @@ export class DanhThuByInnkeepeComponent implements OnInit {
         this.dangBD="Biểu đồ đường";
         this.lineChartTypeBD="line";
     }
-
+    tongchitietdatsan="";
     getChiTietDanhthuByInnkeeper(id: number) {
         this.checkdatsans = false;
         this.dashboardService.getChiTietDanhthuByInnkeeper(id).subscribe(data => {
             if (data.status) {
                 this.datsans = data.mangChitietDoanhthus;
+                let tongchitietdatsan=0;
+                for (let i = 0; i < this.datsans.length; i++) {
+                    tongchitietdatsan += parseInt(this.datsans[i].price);
+                    this.datsans[i].price = this.datsans[i].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+                this.tongchitietdatsan=tongchitietdatsan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                 this.taodatsansnew(this.page);
                 this.checkdatsans = true;
                 this.changeDetectorRef.detectChanges();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: data.message,
+                })
+
             }
         })
     }

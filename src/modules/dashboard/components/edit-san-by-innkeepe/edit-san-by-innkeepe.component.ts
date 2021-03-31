@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
-import Swal from 'sweetalert2';
-import { DashboardService } from '../../services/dashboard.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { DashboardService } from "../../services/dashboard.service";
 import { environment } from './../../../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 import { San1 } from '../../models/dashboard.model';
 
 import { AuthService } from '../../../auth/services/auth.service'
@@ -26,46 +27,63 @@ export class EditSanByInnkeepeComponent implements OnInit {
     ) {}
     id=0;
     idquan=0;
+    checkquan=false;
+    quan:any;
+    url = environment.url;
     ngOnInit() {
         this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
         console.log(this.id);
-        
-        this.checkTokenInnkeeperAndIdsan(this.id);
+        this.getSanByInnkeeper(this.id);
     }
-
-    checkTokenInnkeeperAndIdsan(idsan: number){
-        this.authService.checkTokenInnkeeperAndIdsan(idsan).subscribe(data=>{
-            console.log(data);
-            if(data.status){
-                this.getSanByInnkeeper(idsan);
-            }else{
-                this.router.navigate(['dashboard/quans']);
-            }
-            
-        })
-    }
-
     getSanByInnkeeper(id:number){
+        this.checkquan=false;
         this.checksan=false;
-        this.dashboardService.getSanByid(id).subscribe(
+        this.dashboardService.getSanByInnkeeperVaId(id).subscribe(
             data=>{
                 console.log(data);
-                
-               if (data.status) {
+                if (data.status) {
                    this.idquan=data.san.idquan;
                    this.san = data.san;
                    this.checksan=true;
+                   this.quan = data.quan;
+                   this.reviewquan = Math.round(data.quan.review);
+                   this.mangreviewquan = this.taomotmangreview(this.reviewquan);
+                   this.checkquan=true;
                    this.changeDetectorRef.detectChanges();
-               }
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: data.message,
+                    })
+
+                   this.router.navigate(['dashboard/quans']);
+                }
            }
             
         )
     }
+    mangreviewquan: any;
+    reviewquan = 0;
+
+    taomotmangreview(review: number) {
+        switch (review) {
+            case 0: return [false, false, false, false, false];
+            case 1: return [true, false, false, false, false];
+            case 2: return [true, true, false, false, false];
+            case 3: return [true, true, true, false, false];
+            case 4: return [true, true, true, true, false];
+            case 5: return [true, true, true, true, true];
+            default:
+                break;
+        }
+    }
+
+
 
     edit(name: string, numberpeople: number, priceperhour:number){
         
         Swal.fire({
-            title: "Do you want to save the changes?",
+            title: "bạn có muốn thay đổi thông tin của sân này hay không?",
             showCancelButton: true,
             confirmButtonText: 'Save',
         }).then((result) => {

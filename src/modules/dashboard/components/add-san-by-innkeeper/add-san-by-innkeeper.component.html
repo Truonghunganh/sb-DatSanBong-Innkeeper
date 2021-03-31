@@ -1,82 +1,92 @@
-<div class="container py-2">
-    <div class="row my-2">
-        <div class="col-md-9">
-            <div class="col-lg-8 order-lg-1 personal-info">
-                <form>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Tên Sân</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" #name required placeholder="Name" />
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Số người trong 1 đội</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" #numberpeople required placeholder="Numberpeople" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">Số tiền trong 1 giờ</label>
-                        <div class="col-lg-9">
-                            <input class="form-control" #priceperhour required placeholder="Priceperhour" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-lg-9 ml-auto text-right">
-                            <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Cancel" />
-                            <input type="button" class="btn btn-primary"
-                                (click)="Add(name.value,numberpeople.value,priceperhour.value)" value="Save Changes" />
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-        <div class="col-md-3">
-            <h3><strong>Thông tin của quán</strong></h3>
-            <div *ngIf="checkquan; then display2; else loading2"></div>
-            <ng-template #display2>
-                <div class="text-center">
-                    <table style="width: 100%;" border="1">
-                        <tr>
-                            <td style="text-align: center;" colspan="2">
-                                <div *ngIf="quan.image">
-                                    <img style="width: 150px; " src="{{url+'/'+quan.image}}">
-                                </div>
-                                <div *ngIf="!quan.image">
-                                    <img class="profile_img" src="../../../assets/img/avatar.jpg">
-                                </div>
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <td style="text-align: center;">Tên quán</td>
-                            <td style="text-align: center;"> <strong>{{ quan.name }}</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center;">Số điện thoại của quán</td>
-                            <td style="text-align: center;"><strong>{{ quan.phone}}</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center;">Địa chỉ của quán</td>
-                            <td style="text-align: center;"><a href="{{quan.linkaddress}}"><strong>{{ quan.address}}</strong></a></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center;">thời gian tạo ra quán</td>
-                            <td style="text-align: center;"><strong>{{ quan.Create_time}}</strong></td>
-                        </tr>
-                    </table>
-                </div>
-            </ng-template>
-            <ng-template #loading2>
-                <div class="text-center">
-                    <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </div>
-            </ng-template>
-            
-        </div>
+<sb-card>
+    <div class="card-header">
+        <h1 style="color:chartreuse">1 .Thông tin của Quán
+        </h1>
     </div>
-</div>
+    <div class="card-body">
+        <div *ngIf="checkquan; then display2; else loading2"></div>
+        <ng-template #display2>
+            <div class="text-center">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="text-align: center;width: 50%;" rowspan="4">
+                            <div *ngIf="quan.image">
+                                <img style="width: 50%; " src="{{url+'/'+quan.image}}">
+                            </div>
+                            <div *ngIf="!quan.image">
+                                <img class="profile_img" src="../../../assets/img/avatar.jpg">
+                            </div>
+                        </td>
+                        <td style="text-align: center;"> <strong>{{ quan.name }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;"><strong>{{ quan.phone}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <a href="{{quan.linkaddress}}">
+                                <strong>{{ quan.address}}</strong>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <img *ngIf="mangreviewquan[0]" src="../../../assets/img/reviews/Star_full.svg" class="star">
+                            <img *ngIf="!mangreviewquan[0]" src="../../../assets/img/reviews/0-star.svg" class="star">
+                            <img *ngIf="mangreviewquan[1]" src="../../../assets/img/reviews/Star_full.svg" class="star">
+                            <img *ngIf="!mangreviewquan[1]" src="../../../assets/img/reviews/0-star.svg" class="star">
+                            <img *ngIf="mangreviewquan[2]" src="../../../assets/img/reviews/Star_full.svg" class="star">
+                            <img *ngIf="!mangreviewquan[2]" src="../../../assets/img/reviews/0-star.svg" class="star">
+                            <img *ngIf="mangreviewquan[3]" src="../../../assets/img/reviews/Star_full.svg" class="star">
+                            <img *ngIf="!mangreviewquan[3]" src="../../../assets/img/reviews/0-star.svg" class="star">
+                            <img *ngIf="mangreviewquan[4]" src="../../../assets/img/reviews/Star_full.svg" class="star">
+                            <img *ngIf="!mangreviewquan[4]" src="../../../assets/img/reviews/0-star.svg" class="star">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </ng-template>
+        <ng-template #loading2>
+            <div class="text-center">
+                <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</sb-card>
+<sb-card>
+    <div class="card-header">
+        <h1 style="color:crimson">2. Thêm sân vào quán</h1>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Tên Sân</label>
+                <div class="col-lg-9">
+                    <input class="form-control" #name required placeholder="Tên Sân" />
+                </div>
+            </div>
+        
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Số người trong 1 đội</label>
+                <div class="col-lg-9">
+                    <input class="form-control" #numberpeople required placeholder="Số người trong 1 đội" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label form-control-label">Số tiền trong 1 giờ</label>
+                <div class="col-lg-9">
+                    <input class="form-control" #priceperhour required placeholder="Số tiền trong 1 giờ" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-9 ml-auto text-right">
+                    <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Hủy bỏ" />
+                    <input type="button" class="btn btn-primary" (click)="Add(name.value,numberpeople.value,priceperhour.value)"
+                        value="Thêm vào" />
+                </div>
+            </div>
+        </form>
+    </div>
+</sb-card>

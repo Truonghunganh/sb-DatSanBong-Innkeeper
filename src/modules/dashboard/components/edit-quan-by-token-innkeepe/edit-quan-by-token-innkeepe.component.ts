@@ -3,8 +3,6 @@ import Swal from 'sweetalert2';
 import { DashboardService } from '../../services/dashboard.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from './../../../../environments/environment';
-import { Innkeeper } from '../../models/dashboard.model';
-
 import { AuthService } from '../../../auth/services/auth.service'
 
 @Component({
@@ -48,21 +46,12 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
         this.idquan = Number(this.activatedRoute.snapshot.paramMap.get('idquan'));
         console.log(this.idquan);
         
-        this.checktoken();
-    }
-    checktoken() {
-        this.authService.checkTokenInnkeeper().subscribe(data => {
-            if (!data.status) {
-                this.router.navigate(['/auth/login']);
-            } else {
-                this.getQuanByInnkeeper(this.idquan);
-            }
-        })
+        this.getQuanByIdAndTokenInnkeeper(this.idquan);
     }
 
-    getQuanByInnkeeper(id: number){
+    getQuanByIdAndTokenInnkeeper(id: number){
         this.checkquan=false;
-        this.dashboardService.getQuanByInnkeeper(id).subscribe(data=>{
+        this.dashboardService.getQuanByIdAndTokenInnkeeper(id).subscribe(data=>{
             console.log(data);
             if (data.status) {
                 this.quan=data.quan;

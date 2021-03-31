@@ -92,9 +92,5 @@ export class InnkeeperComponent implements OnInit {
 
                 
     }
-    editInnkeeper() {
-        this.router.navigate(['/dashboard/editinnkeeper']);
-
-    }
 
 }

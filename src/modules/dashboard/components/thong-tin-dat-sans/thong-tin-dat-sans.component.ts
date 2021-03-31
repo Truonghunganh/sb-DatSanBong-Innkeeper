@@ -47,6 +47,7 @@ export class ThongTinDatSansComponent implements OnInit {
     }
     
     getAllDatSanByInnkeeperAndIdquan(idquan: number,trangthai:boolean,time:string){
+        this.page=1;
         this.checkdatsans=false;
         this.dashboardService.getAllDatSanByInnkeeperAndIdquan(idquan,trangthai,time).subscribe(data=>{
             console.log(data);
@@ -145,6 +146,7 @@ export class ThongTinDatSansComponent implements OnInit {
         
     }
     ChangeStatus(){
+        
         this.trangthai=!this.trangthai;
         this.getAllDatSanByInnkeeperAndIdquan(this.idquan,this.trangthai,this.time)
     }

@@ -1,34 +1,32 @@
-<h1 style="color:chartreuse">1 .Thông tin của Quán
-    <input type="button" class="btn btn-primary float-right" (click)="addSan()"
-     value="thêm Sân" />
-    <input type="button" class="btn btn-success float-right" (click)="xemdanhthu()"
-         value="xem danh thu của quán" />
-    <input type="button" class="btn btn-danger float-right" (click)="xemdanhsachdatsan()" value="Xem danh sách đặt sân" />
-</h1>
 <sb-card>
+    <div class="card-header">
+        <h1 style="color:chartreuse">1 .Thông tin của Quán
+            <input type="button" class="btn btn-primary float-right" (click)="addSan()" value="thêm Sân" />
+            <input type="button" class="btn btn-success float-right" (click)="xemdanhthu()" value="xem danh thu của quán" />
+            <input type="button" class="btn btn-danger float-right" (click)="xemdanhsachdatsan()"
+                value="Xem danh sách đặt sân" />
+        </h1>
+    </div>
     <div class="card-body">
-        <div *ngIf="checkquan then display2; else loading2"></div>
+        <div *ngIf="checkquan; then display2; else loading2"></div>
         <ng-template #display2>
             <div class="text-center">
-                <table style="width: 100%;" border="1">
+                <table style="width: 100%;">
                     <tr>
-                        <td style="text-align: center;" rowspan="4">
+                        <td style="text-align: center;width: 50%;" rowspan="4">
                             <div *ngIf="quan.image">
-                                <img style="width: 150px; " src="{{url+'/'+quan.image}}">
+                                <img style="width: 50%; " src="{{url+'/'+quan.image}}">
                             </div>
                             <div *ngIf="!quan.image">
                                 <img class="profile_img" src="../../../assets/img/avatar.jpg">
                             </div>
                         </td>
-                        <td style="text-align: center;">Tên Quán</td>
                         <td style="text-align: center;"> <strong>{{ quan.name }}</strong></td>
                     </tr>
                     <tr>
-                        <td style="text-align: center;">Số điện thoại</td>
                         <td style="text-align: center;"><strong>{{ quan.phone}}</strong></td>
                     </tr>
                     <tr>
-                        <td style="text-align: center;">Địa chỉ </td>
                         <td style="text-align: center;">
                             <a href="{{quan.linkaddress}}">
                                 <strong>{{ quan.address}}</strong>
@@ -36,7 +34,6 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align: center;">Review</td>
                         <td style="text-align: center;">
                             <img *ngIf="mangreviewquan[0]" src="../../../assets/img/reviews/Star_full.svg" class="star">
                             <img *ngIf="!mangreviewquan[0]" src="../../../assets/img/reviews/0-star.svg" class="star">
@@ -63,15 +60,17 @@
     </div>
 </sb-card>
 
-<h1 style="color:blue">2 .Lịch đặt sân của quán</h1>
-<div class="form-group">
-    <div>
-        Hãy chọn ngày đặt sân :
-        <input type="date" [(ngModel)]="today" (change)="chonngay($event);">
-    </div>
-</div>
-<sb-card>
 
+<sb-card>
+    <div class="card-header">
+        <h1 style="color:blue">2 .Lịch đặt sân của quán</h1>
+        <div class="form-group">
+            <div>
+                Hãy chọn ngày đặt sân :
+                <input type="date" [(ngModel)]="today" (change)="chonngay($event);">
+            </div>
+        </div>
+    </div>
     <div class="card-body">
         <div *ngIf="checkdatsan then display; else loading"></div>
         <ng-template #display>
@@ -172,8 +171,10 @@
     </div>
 </sb-card>
 
-<h1 style="color:red">3 .Danh sách các sân bóng</h1>
 <sb-card>
+    <div class="card-header">
+        <h1 style="color:red">3 .Danh sách các sân bóng</h1>
+    </div>
     <div class="card-body">
         <div *ngIf="checkdatsan; then display1; else loading1"></div>
         <ng-template #display1>
@@ -198,6 +199,22 @@
                                     <td><strong>{{ san.priceperhour }}</strong></td>
                                 </tr>
                                 <tr>
+                                    <td>
+                                        <div *ngIf="san.trangthai" class="custom-control custom-switch">
+                                            <input checked 
+                                            type="checkbox" class="custom-control-input" id="status" >
+                                            <label class="custom-control-label" for="status">
+                                            </label>
+                                            <button class="btn btn-primary" (click)="thaydoi(san.id,san.trangthai)">thay đổi</button>
+                                        </div>
+                                        <div *ngIf="!san.trangthai" class="custom-control custom-switch">
+                                            <input  type="checkbox" class="custom-control-input"
+                                                id="status">
+                                            <label class="custom-control-label" for="status">
+                                            </label>
+                                            <button class="btn btn-primary" (click)="thaydoi(san.id,san.trangthai)">thay đổi</button>
+                                        </div>
+                                    </td>
                                     <fa-icon routerLink="/dashboard/editSan/{{san.id}}" class='fas fa-trash fa-2x' [icon]='["fas","edit"]'></fa-icon>
                                 </tr>
                             </tbody>

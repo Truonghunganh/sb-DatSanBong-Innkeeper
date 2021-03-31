@@ -65,13 +65,8 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
                 this.listdatsancuaquanOld=data.datsans;
                 const arrMangOld = new Array();
                 for (let i = 0; i < data.datsans.length; i++) {
-                    const a = new Array();
-                    for (let j = 0; j < data.datsans[i].datsans.length; j++) {
-                        a[j] = this.mangdatsancuamotsan(data.datsans[i].datsans[j]);
-                    }
-                    arrMangOld[i] = a;
+                    arrMangOld[i] = data.datsans[i].datsans;
                 }
-                console.log(this.listdatsancuaquanOld);
                 
                 this.mangDatsanOld = arrMangOld;
                 this.checkdatsansOld = true;
@@ -89,11 +84,11 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
                 this.listdatsancuaquanNew = data.datsans;
                 const arrMangNew = new Array();
                 for (let i = 0; i < data.datsans.length; i++) {
-                    const a = new Array();
-                    for (let j = 0; j < data.datsans[i].datsans.length; j++) {
-                        a[j] = this.mangdatsancuamotsan(data.datsans[i].datsans[j]);
-                    }
-                    arrMangNew[i] = a;
+                    // const a = new Array();
+                    // for (let j = 0; j < data.datsans[i].datsans.length; j++) {
+                    //     a[j] = this.mangdatsancuamotsan(data.datsans[i].datsans[j]);
+                    // }
+                    arrMangNew[i] = data.datsans[i].datsans;
                 }
                 this.mangDatsanNew = arrMangNew;
                 this.checkdatsansNew = true;
@@ -107,8 +102,11 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
         this.router.navigate(['/dashboard/quans'])
     }
     Save(){
+        console.log(this.timeOld,this.timeNew);
+        console.log(this.idsanOld,this.idsanNew);
+        
         Swal.fire({
-            html: '<h1 style="color: #41c04d;">Do you want to save the changes?</h1><h4> idsanOld=' + this.idsanOld + '------->idsanNew=' + this.idsanNew + '</h4><h4> timeOld=' + this.timeOld + '------->timeNew=' + this.timeNew + '</h4>',
+            html: '<h1 style="color: #41c04d;">bạn có muốn thay đổi thông tin này hay không?</h1><h4> idsanOld=' + this.idsanOld + '------->idsanNew=' + this.idsanNew + '</h4><h4> timeOld=' + this.timeOld + '------->timeNew=' + this.timeNew + '</h4>',
             showCancelButton: true,
             confirmButtonText: 'Save',
         }).then((result) => {
@@ -120,7 +118,7 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
                     if (data.status) {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Your work has been saved',
+                            title: 'đã lưu thành công',
                             showConfirmButton: false,
                             timer: 1500
                         });
@@ -140,33 +138,6 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
             }
         })
 
-    }
-    mangdatsancuamotsan(san: any) {
-        let array = new Array(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
-        for (let i = 0; i < san.length; i++) {
-            switch (san[i].start_time.slice(11, 13)) {
-                case "05": array[0] = true; break;
-                case "06": array[1] = true; break;
-                case "07": array[2] = true; break;
-                case "08": array[3] = true; break;
-                case "09": array[4] = true; break;
-                case "10": array[5] = true; break;
-                case "11": array[6] = true; break;
-                case "12": array[7] = true; break;
-                case "13": array[8] = true; break;
-                case "14": array[9] = true; break;
-                case "15": array[10] = true; break;
-                case "16": array[11] = true; break;
-                case "17": array[12] = true; break;
-                case "18": array[13] = true; break;
-                case "19": array[14] = true; break;
-                case "20": array[15] = true; break;
-
-                default:
-                    break;
-            }
-        }
-        return array;
     }
     chondatsanOld(gio: number, idsan: number) {
         this.idsanOld=idsan;

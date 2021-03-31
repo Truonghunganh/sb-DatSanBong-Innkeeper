@@ -58,7 +58,7 @@ export class AddQuanByInnkeeperComponent implements OnInit {
             if (data.status) {
                 Swal.fire({
                     icon: 'success',
-                    title: 'Your work has been saved',
+                    title: 'Bạn đã thêm quán thành công',
                     showConfirmButton: false,
                     timer: 1500
                 });

@@ -1,7 +1,11 @@
-<h1 style="color:blue"> 1. thông tin cá nhân của người dùng
-    <button class="btn btn-primary float-right" (click)="editInnkeeper()">Edit User</button>
-</h1>
 <sb-card>
+    <div class="card-header">
+        <h1 style="color:blue"> 1. thông tin cá nhân của người dùng
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0 float-right">
+                <input type="button" class="btn btn-primary " routerLink="/dashboard/editinnkeeper" value="chỉnh sữa thông tin" /> 
+            </form>
+        </h1>
+    </div>
     <div class="card-body">
         <div *ngIf="checkinnkeeper ; then display ; else loading"></div>
         <ng-template #display>
@@ -9,11 +13,11 @@
                 <table class="table table-striped " style="width:100%">
                     <tbody>
                         <tr>
-                            <td>full_name</td>
+                            <td>Họ và tên</td>
                             <td> <strong>{{ innkeeper.name}}</strong></td>
                         </tr>
                         <tr>
-                            <td>Phone</td>
+                            <td>Số Điện thoại</td>
                             <td><strong>{{ innkeeper.phone}}</strong></td>
                         </tr>
                         <tr>
@@ -21,7 +25,7 @@
                             <td><strong>{{ innkeeper.gmail }}</strong></td>
                         </tr>
                         <tr>
-                            <td>Address</td>
+                            <td>Địa chỉ</td>
                             <td><strong>{{ innkeeper.address}}</strong></td>
                         </tr>
                     </tbody>
@@ -40,35 +44,40 @@
     </div>
 </sb-card>
 
-<h1 style="color:aqua"> 2. các quán chưa được phe duyệt của chủ quán
-</h1>
 
 <sb-card>
+    <div class="card-header">
+        <h1 style="color:red"> 2. các quán chưa được phe duyệt của chủ quán
+        </h1>
+    </div>
     <div class="card-body">
         <div *ngIf="checklistquanschuapheduyet ; then display1 ; else loading1"></div>
         <ng-template #display1>
             <div class="row">
-                
-                <table class="table table-striped " style="width:100%">
+                <table  border="1"  style="width:100%">
                     <thead >
-                        <tr>
-                            <td>id</td>
+                        <tr class="card-header">
+                            <td>STT</td>
                             <td>Name</td>
                             <td>Address</td>
                             <td>Phone</td>
                             <td>Ngày giờ đăng kí</td>
+                            <td>kinh độ</td>
+                            <td>Vĩ độ</td>
                             <td>Image</td>
                             <td>Actions</td>
                         </tr>
                     </thead>
-                    <tbody  >
-                        <tr *ngFor="let quan of listquanschuapheduyet">
-                            <td>{{quan.id}}</td>
+                    <tbody>
+                        <tr *ngFor="let quan of listquanschuapheduyet ; index as i">
+                            <td>{{i+1}}</td>
                             <td>{{quan.name}}</td>
                             <td>{{quan.address}}</td>
                             <td>{{quan.phone}}</td>
                             <td>{{quan.Create_time}}</td>
-                            <td>
+                            <td>{{quan.kinhdo}}</td>
+                            <td>{{quan.vido}}</td>
+                            <td>    
                                 <div *ngIf="quan.image">
                                     <img style="width: 5opx; height: 50px;" src="{{url+'/'+quan.image}}">
                                 </div>

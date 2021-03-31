@@ -47,7 +47,7 @@ export class AuthService {
         this.storage.set('tokenInnkeeper', JSON.stringify(token));
     }
     checkTokenInnkeeperAndIdquan(idquan:number): Observable<any> {
-        return this.http.post<any>(environment.url + '/api/v1/checkTokenInnkeeperAndIdquan', {idquan:idquan}, this.appCommonService.httpOptions).pipe(
+        return this.http.post<any>(environment.url + '/api/v1/checkTokenInnkeeperAndIdquan', {"idquan":idquan}, this.appCommonService.httpOptions).pipe(
             tap(data => {
                 of(data);
             }),
@@ -55,13 +55,13 @@ export class AuthService {
         )
     }
 
-    checkTokenInnkeeperAndIdsan(idsan: number): Observable<any> {
-        return this.http.post<any>(environment.url + '/api/v1/checkTokenInnkeeperAndIdsan', { idsan: idsan }, this.appCommonService.httpOptions).pipe(
-            tap(data => {
-                of(data);
-            }),
-            catchError(this.appCommonService.errorHandler)
-        )
-    }
+    // checkTokenInnkeeperAndIdsan(idsan: number): Observable<any> {
+    //     return this.http.post<any>(environment.url + '/api/v1/checkTokenInnkeeperAndIdsan', { idsan: idsan }, this.appCommonService.httpOptions).pipe(
+    //         tap(data => {
+    //             of(data);
+    //         }),
+    //         catchError(this.appCommonService.errorHandler)
+    //     )
+    // }
 
 }

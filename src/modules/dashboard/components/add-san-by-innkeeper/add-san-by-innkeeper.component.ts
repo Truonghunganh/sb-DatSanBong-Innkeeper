@@ -34,16 +34,35 @@ export class AddSanByInnkeeperComponent implements OnInit {
     checkTokenInnkeeperAndIdquan(idquan: number) {
         this.checkquan = false;
         this.authService.checkTokenInnkeeperAndIdquan(idquan).subscribe(data => {
-            console.log(data);
-
             if (!data.status) {
+                Swal.fire({
+                    icon: 'error',
+                    title: data.message,
+                });
                 this.router.navigate(['/dashboard/quans' ])
             } else {
                 this.quan = data.quan;
+                this.reviewquan = Math.round(data.quan.review);
+                this.mangreviewquan = this.taomotmangreview(this.reviewquan);
                 this.checkquan = true;
                 this.changeDetectorRef.detectChanges();
             }
         })
+    }
+    mangreviewquan: any;
+    reviewquan = 0;
+
+    taomotmangreview(review: number) {
+        switch (review) {
+            case 0: return [false, false, false, false, false];
+            case 1: return [true, false, false, false, false];
+            case 2: return [true, true, false, false, false];
+            case 3: return [true, true, true, false, false];
+            case 4: return [true, true, true, true, false];
+            case 5: return [true, true, true, true, true];
+            default:
+                break;
+        }
     }
 
     Cancel(){
@@ -53,9 +72,9 @@ export class AddSanByInnkeeperComponent implements OnInit {
         const san=new San(this.idquan,name,numberpeople,priceperhour);
         console.log(san);
         Swal.fire({
-            title: "Do you want to save the changes?",
+            title: "bạn có muốn thêm sân này không?",
             showCancelButton: true,
-            confirmButtonText: 'Save',
+            confirmButtonText: 'Thêm',
         }).then((result) => {
             if (result.isConfirmed) {
                 this.dashboardService.addSanByInnkeeper(san).subscribe(data => {
@@ -64,7 +83,7 @@ export class AddSanByInnkeeperComponent implements OnInit {
                     if (data.status) {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Your work has been saved',
+                            title: 'bạn đã thêm thành công',
                             showConfirmButton: false,
                             timer: 1500
                         });
@@ -74,13 +93,9 @@ export class AddSanByInnkeeperComponent implements OnInit {
                             icon: 'error',
                             title: data.message,
                         })
-
                     }
                 })
-
-
             }
         }) 
-        
     }
 }

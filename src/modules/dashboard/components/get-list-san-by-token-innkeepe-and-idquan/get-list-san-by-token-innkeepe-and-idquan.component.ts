@@ -39,6 +39,10 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
             console.log(data);
 
             if (!data.status) {
+                Swal.fire({
+                    icon: 'error',
+                    title: data.message,
+                });
                 this.router.navigate(['/dashboard/quans'])
             } else {
                 this.quan=data.quan;
@@ -58,17 +62,49 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
     }
 
 
-
+    mangTrangthaiSan=new Array<boolean>();
     getDatSansvaSansByInnkeeperAndIdquanAndNgay(idquan: number, ngay: any) {
         this.checkdatsan = false;
         this.dashboardService.getDatSansvaSansByInnkeeperAndIdquanAndNgay(idquan, ngay).subscribe(data => {
             if (data.status) {
                 this.mangDatsan = data.datsans;
                 this.sans = data.sans;
+                for (let i = 0; i <this.sans.length; i++) {
+                    this.mangTrangthaiSan[i]=this.sans[i].trangthai;
+                }
                 this.checkdatsan = true;
                 this.ref.detectChanges();
             }
         })
+    }
+    thaydoi(idsan: number, trangthai:boolean){
+        console.log(idsan, trangthai);
+        Swal.fire({
+            title: "bạn có muốn thay đổi trạng thái sân này hay không?",
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.dashboardService.thayDoiTrangthaiSanByInnkeeper(idsan, trangthai).subscribe(data => {
+                    if (data.status) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Bạn đã thay đổi trạng thái sân thành công',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        this.getDatSansvaSansByInnkeeperAndIdquanAndNgay(this.idquan, this.ngayvagio);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: data.message,
+                        });
+                    }
+                })
+            }
+        })
+
+        
     }
     mangreviewquan: any;
     reviewquan = 0;
