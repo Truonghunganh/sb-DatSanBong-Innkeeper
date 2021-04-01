@@ -36,6 +36,20 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-lg-2 col-form-label form-control-label">kinh độ</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" #kinhdo name="quan.kinhdo" [(ngModel)]="quan.kinhdo" required
+                                placeholder="Address link" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label form-control-label">Vĩ độ</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" #vido name="quan.vido" [(ngModel)]="quan.vido" required
+                                placeholder="Address link" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-lg-2 col-form-label form-control-label">cái hình củ</label>
                         <div class="col-lg-9">
                             <div *ngIf="quan.image">
@@ -57,9 +71,9 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-9 ml-auto text-right">
-                            <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Cancel" />
+                            <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="hủy" />
                             <input type="button" class="btn btn-primary"
-                                (click)="edit(name.value,address.value,linkaddress.value)" value="Save Changes" />
+                                (click)="edit(name.value,address.value,linkaddress.value,kinhdo.value,vido.value)" value="Lưu thông tin" />
                         </div>
                     </div>
                 </form>

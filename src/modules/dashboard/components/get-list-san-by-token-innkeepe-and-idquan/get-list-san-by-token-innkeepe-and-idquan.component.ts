@@ -16,7 +16,7 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
         private dashboardService: DashboardService,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private ref: ChangeDetectorRef,
+        private changeDetectorRef: ChangeDetectorRef,
         private authService: AuthService,
     ) { }
     idquan = 1;
@@ -73,10 +73,11 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
                     this.mangTrangthaiSan[i]=this.sans[i].trangthai;
                 }
                 this.checkdatsan = true;
-                this.ref.detectChanges();
+                this.changeDetectorRef.detectChanges();
             }
         })
     }
+
     thaydoi(idsan: number, trangthai:boolean){
         console.log(idsan, trangthai);
         Swal.fire({
@@ -131,7 +132,37 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
         
         
     }
+    hienthibinhluan = "Xem binh luận";
+    checkhienthibinhluan = false;
+    checkcomments = false;
+    comments: any;
+    xembinhluan() {
+        this.checkhienthibinhluan = !this.checkhienthibinhluan;
+        if (this.checkhienthibinhluan) {
+            this.hienthibinhluan = "Ẩn bình luận";
+            this.checkcomments = false;
+            this.dashboardService.getAllCommentCuaMotQuanByInnkeeper(this.idquan).subscribe(data => {
+                console.log(data);
 
+                if (data.status) {
+                    this.comments = data.comments;
+                    this.checkcomments = true;
+                    this.changeDetectorRef.detectChanges();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: data.message,
+                    })
+                }
+            })
+        } else {
+            this.hienthibinhluan = "Xem binh luận";
+
+        }
+    }
+    editquan(){
+        this.router.navigate(['/dashboard/editQuanByTokenInnkeeper/'+ this.idquan])
+    }
     addSan(){
         this.router.navigate(['/dashboard/addSan/'+ this.idquan]);
     }

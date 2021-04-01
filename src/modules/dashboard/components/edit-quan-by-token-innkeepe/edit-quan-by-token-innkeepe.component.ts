@@ -66,11 +66,11 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
             }
         })
     }
-    edit(name:string, address:string, linkaddress: string){
+    edit(name:string, address:string, linkaddress: string,kinhdo: string,vido: string){
         Swal.fire({
-            title: "Do you want to save the changes?",
+            title: "bạn có muốn lưu thông tin này không?",
             showCancelButton: true,
-            confirmButtonText: 'Save',
+            confirmButtonText: 'Lưu',
         }).then((result) => {
             if (result.isConfirmed) {
                 const formData = new FormData();
@@ -81,13 +81,15 @@ export class EditQuanByTokenInnkeepeComponent implements OnInit {
                 formData.append('name', name);
                 formData.append('address', address);
                 formData.append('linkaddress', linkaddress);
+                formData.append('kinhdo', kinhdo);
+                formData.append('vido', vido);
                 this.dashboardService.editQuanByTokenInnkeeper(formData).subscribe(data => {
                     console.log(data);
 
                     if (data.status) {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Your work has been saved',
+                            title: 'bạn đã lưu thành công',
                             showConfirmButton: false,
                             timer: 1500
                         });

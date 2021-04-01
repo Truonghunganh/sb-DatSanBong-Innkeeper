@@ -29,6 +29,8 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
     idsanNew = 0;
     timeOld="";
     timeNew="";
+    tensanOld="";
+    tensanNew="";
     constructor(
         private dashboardService: DashboardService,
         private activatedRoute: ActivatedRoute,
@@ -52,7 +54,6 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
     }
     chonngayOld(ngay: any) {
         this.getListDatSanByInnkeeperOld(this.todayOld);
-
     }
     chonngayNew(ngay: any) {
         this.getListDatSanByInnkeeperNew(this.todayNew);
@@ -84,10 +85,6 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
                 this.listdatsancuaquanNew = data.datsans;
                 const arrMangNew = new Array();
                 for (let i = 0; i < data.datsans.length; i++) {
-                    // const a = new Array();
-                    // for (let j = 0; j < data.datsans[i].datsans.length; j++) {
-                    //     a[j] = this.mangdatsancuamotsan(data.datsans[i].datsans[j]);
-                    // }
                     arrMangNew[i] = data.datsans[i].datsans;
                 }
                 this.mangDatsanNew = arrMangNew;
@@ -104,43 +101,54 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
     Save(){
         console.log(this.timeOld,this.timeNew);
         console.log(this.idsanOld,this.idsanNew);
+        if(this.timeOld==""||this.timeNew==""||this.idsanNew==0||this.idsanOld==0){
+            Swal.fire({
+                icon: 'error',
+                title: "bạn chưa chọn đủ thông tin cần chỉnh sữa",
+            })
+        }else{
+            Swal.fire({
+                html: '<h1 style="color: #41c04d;">bạn có muốn thay đổi thông tin này hay không?</h1>' +
+                    '<table style="width: 100%;">' +
+                    '<tr><td style="text-align: center;width: 50%;">tên sân củ</td><td style="text-align: center;width: 50%;">' + this.tensanOld + '</td></tr>' +
+                    '<tr><td  style="text-align: center;width: 50%;">tên sân mới</td><td style="text-align: center;width: 50%;">' + this.tensanNew + '</td></tr>' +
+                    '<tr><td style="text-align: center;width: 50%;">thời gian củ</td><td style="text-align: center;width: 50%;">' + this.timeOld + '</td></tr>' +
+                    '<tr><td style="text-align: center;width: 50%;">thời gian mới</td><td style="text-align: center;width: 50%;">' + this.timeNew + '</td></tr>' +
+                    '</table>',
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const thaydoidatsan = new Thaydoidatsan(this.idsanOld, this.idsanNew, this.timeOld, this.timeNew);
+                    this.dashboardService.thayDoiDatSanByInnkeeper(thaydoidatsan).subscribe(data => {
+                        console.log(data);
+
+                        if (data.status) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'đã lưu thành công',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            this.getListDatSanByInnkeeperOld(this.todayOld);
+                            this.getListDatSanByInnkeeperNew(this.todayNew);
+
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: data.message,
+                            })
+                        }
+                    })
+                }
+            })
+        }
         
-        Swal.fire({
-            html: '<h1 style="color: #41c04d;">bạn có muốn thay đổi thông tin này hay không?</h1><h4> idsanOld=' + this.idsanOld + '------->idsanNew=' + this.idsanNew + '</h4><h4> timeOld=' + this.timeOld + '------->timeNew=' + this.timeNew + '</h4>',
-            showCancelButton: true,
-            confirmButtonText: 'Save',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                const thaydoidatsan=new Thaydoidatsan(this.idsanOld,this.idsanNew,this.timeOld,this.timeNew);
-                this.dashboardService.thayDoiDatSanByInnkeeper(thaydoidatsan).subscribe(data => {
-                    console.log(data);
-
-                    if (data.status) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'đã lưu thành công',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        this.getListDatSanByInnkeeperOld(this.todayOld);
-                        this.getListDatSanByInnkeeperNew(this.todayNew);
-                        
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: data.message,
-                        })
-
-                    }
-                })
-
-
-            }
-        })
 
     }
-    chondatsanOld(gio: number, idsan: number) {
+    chondatsanOld(gio: number, idsan: number,tensanOld:string) {
         this.idsanOld=idsan;
+        this.tensanOld=tensanOld;
         switch (gio) {
             case 0:
                 this.timeOld =this.todayOld  + " 05:00:00";
@@ -199,8 +207,9 @@ export class ThayDoiDatSanByInnkeeperComponent implements OnInit {
         }
     }
 
-    chondatsanNew(gio: number, idsan: number) {
+    chondatsanNew(gio: number, idsan: number,tensanNew:string) {
         this.idsanNew = idsan;
+        this.tensanNew=tensanNew;
         switch (gio) {
             case 0:
                 this.timeNew = this.todayNew + " 05:00:00";

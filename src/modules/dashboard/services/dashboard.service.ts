@@ -139,4 +139,8 @@ export class DashboardService {
         return this.http.post<any>(environment.url + "/api/v1/thayDoiTrangthaiSanByInnkeeper",{"idsan": idsan,"trangthai": trangthai}, this.appCommonService.httpOptions).pipe(
             tap(data => of(data)), catchError(this.appCommonService.errorHandler))
     }
+    getAllCommentCuaMotQuanByInnkeeper(idquan: number): Observable<any>{
+        return this.http.get<any>(environment.url +"/api/v1/getAllCommentCuaMotQuanByInnkeeper?idquan="+idquan,this.appCommonService.httpOptions).
+        pipe(tap(data => of(data)), catchError(this.appCommonService.errorHandler));
+    }
 }

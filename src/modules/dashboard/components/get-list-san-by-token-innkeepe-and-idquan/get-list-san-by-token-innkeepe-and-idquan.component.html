@@ -1,11 +1,13 @@
 <sb-card>
     <div class="card-header">
-        <h1 style="color:chartreuse">1 .Thông tin của Quán
-            <input type="button" class="btn btn-primary float-right" (click)="addSan()" value="thêm Sân" />
-            <input type="button" class="btn btn-success float-right" (click)="xemdanhthu()" value="xem danh thu của quán" />
-            <input type="button" class="btn btn-danger float-right" (click)="xemdanhsachdatsan()"
-                value="Xem danh sách đặt sân" />
-        </h1>
+        <div style="text-align: center;">
+            <h1 style="color:chartreuse">1 .Thông tin của Quán
+            </h1>
+            <input type="button" class="btn btn-warning " (click)="editquan()" value="Chỉnh sữa quán" />
+            <input type="button" class="btn btn-primary " (click)="addSan()" value="thêm Sân" />
+            <input type="button" class="btn btn-success " (click)="xemdanhthu()" value="xem danh thu của quán" />
+            <input type="button" class="btn btn-danger " (click)="xemdanhsachdatsan()" value="Xem danh sách đặt sân" />
+        </div>        
     </div>
     <div class="card-body">
         <div *ngIf="checkquan; then display2; else loading2"></div>
@@ -62,7 +64,7 @@
 
 
 <sb-card>
-    <div class="card-header">
+    <div class="card-header" style="text-align: center;">
         <h1 style="color:blue">2 .Lịch đặt sân của quán</h1>
         <div class="form-group">
             <div>
@@ -173,7 +175,7 @@
 
 <sb-card>
     <div class="card-header">
-        <h1 style="color:red">3 .Danh sách các sân bóng</h1>
+        <h1 style="color:red;text-align: center;">3 .Danh sách các sân bóng</h1>
     </div>
     <div class="card-body">
         <div *ngIf="checkdatsan; then display1; else loading1"></div>
@@ -234,3 +236,41 @@
         </ng-template>
     </div>
 </sb-card>
+
+<input class="form-control btn btn-success" (click)="xembinhluan()" type="button" value="{{hienthibinhluan}}">
+<div *ngIf="checkhienthibinhluan">
+    <sb-card>
+        <div class="card-body">
+            <div *ngIf="checkcomments; then display3; else loading3"></div>
+            <ng-template #display3>
+                <div class="row">
+                    <div class="card-body">
+                        <div class="form-group row" *ngFor="let comment of comments ;index as i">
+                            <label class="col-lg-1 col-form-label form-control-label">
+                                <img class="card-img-top" style="display: block;" src="../../../assets/img/avatar.jpg"
+                                    alt="Card image cap">
+                            </label>
+                            <div class="col-lg-11">
+                                <h5>
+                                    <strong>{{comment.tenUser}}</strong>
+                                    {{comment.Create_time}}
+                                </h5>
+                                <div class="input-group">
+                                    {{comment.binhluan}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template #loading3>
+                <div class="text-center">
+                    <div class="spinner-grow" style="width: 15rem; height: 15rem;text-align: center;" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </sb-card>
+
+</div>
