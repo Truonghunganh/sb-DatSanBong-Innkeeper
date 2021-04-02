@@ -61,12 +61,13 @@ export class GetListSanByTokenInnkeepeAndIdquanComponent implements OnInit {
 
     }
 
-
+    sansTT: any;
     mangTrangthaiSan=new Array<boolean>();
     getDatSansvaSansByInnkeeperAndIdquanAndNgay(idquan: number, ngay: any) {
         this.checkdatsan = false;
         this.dashboardService.getDatSansvaSansByInnkeeperAndIdquanAndNgay(idquan, ngay).subscribe(data => {
             if (data.status) {
+                this.sansTT=data.sansTT;
                 this.mangDatsan = data.datsans;
                 this.sans = data.sans;
                 for (let i = 0; i <this.sans.length; i++) {

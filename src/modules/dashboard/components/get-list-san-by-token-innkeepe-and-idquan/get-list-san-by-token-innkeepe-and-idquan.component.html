@@ -99,7 +99,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let san of sans ;index as i">
+                    <tr *ngFor="let san of sansTT ;index as i">
                         <td>
                             {{san.name}}
                         </td>
@@ -202,20 +202,20 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div *ngIf="san.trangthai" class="custom-control custom-switch">
-                                            <input checked 
+                                        <div class="custom-control custom-switch">
+                                            <input [checked]="san.trangthai" 
                                             type="checkbox" class="custom-control-input" id="status" >
-                                            <label class="custom-control-label" for="status">
+                                            <label class="custom-control-label" type='hidden' for="status">
                                             </label>
                                             <button class="btn btn-primary" (click)="thaydoi(san.id,san.trangthai)">thay đổi</button>
                                         </div>
-                                        <div *ngIf="!san.trangthai" class="custom-control custom-switch">
+                                        <!-- <div *ngIf="!san.trangthai" class="custom-control custom-switch">
                                             <input  type="checkbox" class="custom-control-input"
                                                 id="status">
                                             <label class="custom-control-label" for="status">
                                             </label>
                                             <button class="btn btn-primary" (click)="thaydoi(san.id,san.trangthai)">thay đổi</button>
-                                        </div>
+                                        </div> -->
                                     </td>
                                     <fa-icon routerLink="/dashboard/editSan/{{san.id}}" class='fas fa-trash fa-2x' [icon]='["fas","edit"]'></fa-icon>
                                 </tr>

@@ -5,7 +5,7 @@
     <div class="card-body">
         <sb-card>
             <div class="card-header">
-                <h2 style="color:chartreuse">1 .Thông tin của Quán
+                <h2 style="color:chartreuse; text-align:center">1 .Thông tin của Quán
                 </h2>
             </div>
             <div class="card-body">
@@ -64,9 +64,8 @@
         <div *ngIf="checkchitiet">
             <sb-card>
                 <div class="card-header">
-                    <h2 style="color:red">2. Chọn tháng doanh thu :
+                    <h2 style="color:red; text-align:center">2. Chọn tháng doanh thu :
                         <input type="month" [(ngModel)]="thang" (change)="chonthang($event);">
-                        <input type="button" class="btn btn-danger float-right" (click)="break()" value="Trở về" />
                     </h2>
                 </div>
                 <div class="card-body">
@@ -139,7 +138,7 @@
             
             <sb-card>
                 <div class="card-header">
-                    <h2 style="color:blue">2 .Chi tiết doanh thu của quán</h2>
+                    <h2 style="color:blue; text-align:center">2 .Chi tiết doanh thu của quán</h2>
                 </div>
                 <div class="card-body">
                     <div *ngIf="checkdatsans ; then display ; else loading"></div>

@@ -1,6 +1,6 @@
 <sb-card>
     <div class="card-header">
-        <h1 style="color:aqua">Chỉnh sữa thông tin cá nhân</h1>
+        <h1 style="color:blue; text-align: center;">Chỉnh sữa thông tin cá nhân</h1>
     </div>
     <div class="card-body">
         <div *ngIf="checkInnkeeper; then display ; else loading"></div>
@@ -44,9 +44,9 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-9 ml-auto text-right">
-                            <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Cancel" />
+                            <input type="reset" class="btn btn-outline-secondary" (click)="Cancel()" value="Hủy" />
                             <input type="button" class="btn btn-primary"
-                                (click)="Edit(name.value,gmail.value,address.value,password.value)" value="Save Changes" />
+                                (click)="Edit(name.value,gmail.value,address.value,password.value)" value="Lưu thông tin" />
                         </div>
                     </div>
                 </form>
